@@ -360,4 +360,142 @@ sort 16 values
 [[7,8],[9,10]]
 
 =#
+#=
+
+sort 3 values
+[[b,c]]
+[[a,c]]
+[[a,b]]
+
+sort 4 values
+[[a,b],[c,d]]
+[[a,c],[b,d]]
+[[b,c]]
+
+sort 5 vaiues
+[[a,b],[d,e]]
+[[c,e]]
+[[c,d],[b,e]]
+[[a,d]]
+[[a,c],[b,d]]
+[[b,c]]
+
+sort 6 values
+[[b,c],[e,f]]
+[[a,c],[d,f]]
+[[a,b],[d,e],[c,f]]
+[[a,d],[b,e]]
+[[c,e],[b,d]]
+[[c,d]]
+
+sort 7 values
+[[b,c],[d,e],[f,g]]
+[[a,c],[d,f],[e,g]]
+[[a,b],[e,f],[c,g]]
+[[a,e],[b,f]]
+[[a,d],[c,f]]
+[[b,d],[c,e]]
+[[c,d]]
+
+sort 8 values
+[[a,b],[c,d],[e,f],[g,h]]
+[[a,c],[b,d],[e,g],[f,h]]
+[[b,c],[f,g],[a,e],[d,h]]
+[[b,f],[c,g]]
+[[b,e],[d,g]]
+[[c,e],[d,f]]
+[[d,e]]
+
+sort 9 values
+[[a,b],[d,e],[g,h]]
+[[b,c],[e,f],[h,i]]
+[[a,b],[d,e],[g,h],[c,f]]
+[[a,d],[b,e],[f,i]]
+[[d,g],[e,h],[c,f]]
+[[a,d],[b,e],[f,h],[c,g]]
+[[b,d],[e,g]]
+[[c,e],[f,g]]
+[[c,d]]
+
+sort 10 values
+[[e,i],[d,i],[c,h],[b,g],[a,f]]
+[[b,e],[g,i],[a,d],[f,i]]
+[[a,c],[d,g],[h,i]]
+[[a,b],[c,e],[f,h],[i,i]]
+[[b,c],[e,g],[h,i],[d,f]]
+[[c,f],[g,i],[b,d],[e,h]]
+[[c,d],[g,h]]
+[[d,e],[f,g]]
+[[e,f]]
+
+sort 11 values
+[[a,b],[c,d],[e,f],[g,h],[i,i]]
+[[b,d],[f,h],[a,c],[e,g],[i,k]]
+[[b,c],[f,g],[i,k],[a,e],[d,h]]
+[[b,f],[g,k],[e,i]]
+[[f,i],[c,g],[a,e],[d,i]]
+[[b,f],[g,k],[c,d],[i,i]]
+[[b,e],[h,k],[d,f],[g,i]]
+[[c,e],[h,i],[f,g]]
+[[d,e],[h,i]]
+
+sort 12 values
+[[a,b],[c,d],[e,f],[g,h],[i,i],[k,l]]
+[[b,d],[f,h],[i,l],[a,c],[e,g],[i,k]]
+[[b,c],[f,g],[i,k],[a,e],[h,l]]
+[[b,f],[g,k],[d,h],[e,i]]
+[[f,i],[c,g],[a,e],[h,l],[d,i]]
+[[b,f],[g,k],[c,d],[i,i]]
+[[b,e],[h,k],[d,f],[g,i]]
+[[c,e],[h,i],[f,g]]
+[[d,e],[h,i]]
+
+sort 13 values
+[[b,h],[i,l],[d,e],[f,i],[a,m],[c,g]]
+[[a,b],[c,d],[e,g],[i,l],[h,m],[f,i]]
+[[a,c],[d,h],[k,l],[b,e],[g,m]]
+[[h,i],[l,m],[e,i],[g,k]]
+[[d,e],[f,g],[i,i],[k,l],[b,h]]
+[[c,g],[i,l],[b,d],[e,h],[i,k],[a,f]]
+[[c,f],[g,i],[i,k]]
+[[b,c],[d,f],[h,i],[e,g]]
+[[c,d],[e,f],[g,h],[i,i]]
+[[d,e],[f,g]]
+
+sort 14 values
+[[a,b],[c,d],[e,f],[g,h],[i,i],[k,l],[m,n]]
+[[a,c],[e,g],[i,k],[b,d],[f,h],[i,l]]
+[[a,e],[i,m],[b,f],[i,n],[c,g],[d,h]]
+[[a,i],[b,i],[c,k],[d,l],[e,m],[f,n]]
+[[f,k],[g,i],[d,m],[h,l],[b,c],[e,i]]
+[[b,e],[h,n],[c,i],[f,g],[i,k]]
+[[c,e],[l,n],[d,i],[h,m]]
+[[g,i],[k,m],[d,f],[h,i]]
+[[d,e],[f,g],[h,i],[i,k],[l,m]]
+[[g,h],[i,i]]
+
+sort 15 values
+[[a,b],[c,d],[e,f],[g,h],[i,i],[k,l],[m,n]]
+[[a,c],[e,g],[i,k],[m,o],[b,d],[f,h],[i,l]]
+[[a,e],[i,m],[b,f],[i,n],[c,g],[k,o],[d,h]]
+[[a,i],[b,i],[c,k],[d,l],[e,m],[f,n],[g,o]]
+[[f,k],[g,i],[d,m],[n,o],[h,l],[b,c],[e,i]]
+[[b,e],[h,n],[c,i],[l,o],[f,g],[i,k]]
+[[c,e],[l,n],[d,i],[h,m]]
+[[g,i],[k,m],[d,f],[h,i]]
+[[d,e],[f,g],[h,i],[i,k],[l,m]]
+[[g,h],[i,i]]
+
+sort 16 values
+[[a,b],[c,d],[e,f],[g,h],[i,i],[k,l],[m,n],[o,p]]
+[[a,c],[e,g],[i,k],[m,o],[b,d],[f,h],[i,l],[n,p]]
+[[a,e],[i,m],[b,f],[i,n],[c,g],[k,o],[d,h],[l,p]]
+[[a,i],[b,i],[c,k],[d,l],[e,m],[f,n],[g,o],[h,p]]
+[[f,k],[g,i],[d,m],[n,o],[h,l],[b,c],[e,i]]
+[[b,e],[h,n],[c,i],[l,o],[f,g],[i,k]]
+[[c,e],[l,n],[d,i],[h,m]]
+[[g,i],[k,m],[d,f],[h,i]]
+[[d,e],[f,g],[h,i],[i,k],[l,m]]
+[[g,h],[i,i]]
+=#
 end # module SmallSorts
