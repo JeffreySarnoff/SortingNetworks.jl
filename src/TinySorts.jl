@@ -280,19 +280,19 @@ end
 
 function sort(v::Vector{T}) where T
    MIN_ITEMS <= length(v) <= MAX_ITEMS || throw(DomainError())
-   return smallsort(v...)
+   return sort(v...)
 end
 
 if isdefined(:StaticArrays)   
   function sort(sv::SVector)
      n = length(sv)
      MIN_ITEMS <= length(v) <= MAX_ITEMS || throw(DomainError())
-     return SVector{n}( smallsort(x.data)... )
+     return SVector{n}( sort(x.data)... )
   end
 end
 
 for N in collect(MIN_ITEMS:MAX_ITEMS)
-   @eval sort(x::NTuple{$N, T}) where T = smallsort(x...)
+   @eval sort(x::NTuple{$N, T}) where T = sort(x...)
 end   
 
 #= 
@@ -468,21 +468,22 @@ sort 16 values
 [[7,8],[9,10]]
 
 =#
+
 #=
 sort 3 values
-smallsort(a::T, b::T, c::T) where T
+sort(a::T, b::T, c::T) where T
 [[b,c]]
 [[a,c]]
 [[a,b]]
 
 sort 4 values
-smallsort(a::T, b::T, c::T, d::T) where T
+sort(a::T, b::T, c::T, d::T) where T
 [[a,b],[c,d]]
 [[a,c],[b,d]]
 [[b,c]]
 
 sort 5 vaiues
-smallsort(a::T, b::T, c::T, d::T, e::T) where T
+sort(a::T, b::T, c::T, d::T, e::T) where T
 [[a,b],[d,e]]
 [[c,e]]
 [[c,d],[b,e]]
@@ -491,7 +492,7 @@ smallsort(a::T, b::T, c::T, d::T, e::T) where T
 [[b,c]]
 
 sort 6 values
-smallsort(a::T, b::T, c::T, d::T, e::T, f::T) where T
+sort(a::T, b::T, c::T, d::T, e::T, f::T) where T
 [[b,c],[e,f]]
 [[a,c],[d,f]]
 [[a,b],[d,e],[c,f]]
@@ -500,7 +501,7 @@ smallsort(a::T, b::T, c::T, d::T, e::T, f::T) where T
 [[c,d]]
 
 sort 7 values
-smallsort(a::T, b::T, c::T, d::T, e::T, f::T, g::T) where T
+sort(a::T, b::T, c::T, d::T, e::T, f::T, g::T) where T
 [[b,c],[d,e],[f,g]]
 [[a,c],[d,f],[e,g]]
 [[a,b],[e,f],[c,g]]
@@ -510,7 +511,7 @@ smallsort(a::T, b::T, c::T, d::T, e::T, f::T, g::T) where T
 [[c,d]]
 
 sort 8 values
-smallsort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T) where T
+sort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T) where T
 [[a,b],[c,d],[e,f],[g,h]]
 [[a,c],[b,d],[e,g],[f,h]]
 [[b,c],[f,g],[a,e],[d,h]]
@@ -520,7 +521,7 @@ smallsort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T) where T
 [[d,e]]
 
 sort 9 values
-smallsort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T, i::T) where T
+sort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T, i::T) where T
 [[a,b],[d,e],[g,h]]
 [[b,c],[e,f],[h,i]]
 [[a,b],[d,e],[g,h],[c,f]]
@@ -532,7 +533,7 @@ smallsort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T, i::T) where T
 [[c,d]]
 
 sort 10 values
-smallsort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T, i::T, j::T) where T
+sort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T, i::T, j::T) where T
 [[e,j],[d,i],[c,h],[b,g],[a,f]]
 [[b,e],[g,j],[a,d],[f,i]]
 [[a,c],[d,g],[h,j]]
@@ -544,7 +545,7 @@ smallsort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T, i::T, j::T) where T
 [[e,f]]
 
 sort 11 values
-smallsort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T, i::T, j::T, p::T) where T
+sort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T, i::T, j::T, p::T) where T
 [[a,b],[c,d],[e,f],[g,h],[i,j]]
 [[b,d],[f,h],[a,c],[e,g],[i,p]]
 [[b,c],[f,g],[j,p],[a,e],[d,h]]
@@ -556,7 +557,7 @@ smallsort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T, i::T, j::T, p::T) wher
 [[d,e],[h,i]]
 
 sort 12 values
-smallsort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T, i::T, j::T, p::T, q::T) where T
+sort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T, i::T, j::T, p::T, q::T) where T
 [[a,b],[c,d],[e,f],[g,h],[i,j],[p,q]]
 [[b,d],[f,h],[j,q],[a,c],[e,g],[i,p]]
 [[b,c],[f,g],[j,p],[a,e],[h,q]]
@@ -568,7 +569,7 @@ smallsort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T, i::T, j::T, p::T, q::T
 [[d,e],[h,i]]
 
 sort 13 values
-smallsort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T, i::T, j::T, p::T, q::T, r::T) where T
+sort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T, i::T, j::T, p::T, q::T, r::T) where T
 [[b,h],[j,q],[d,e],[f,i],[a,r],[c,g]]
 [[a,b],[c,d],[e,g],[i,q],[h,r],[f,j]]
 [[a,c],[d,h],[p,q],[b,e],[g,r]]
@@ -581,7 +582,7 @@ smallsort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T, i::T, j::T, p::T, q::T
 [[d,e],[f,g]]
 
 sort 14 values
-smallsort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T, i::T, j::T, p::T, q::T, r::T, s::T) where T
+sort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T, i::T, j::T, p::T, q::T, r::T, s::T) where T
 [[a,b],[c,d],[e,f],[g,h],[i,j],[p,q],[r,s]]
 [[a,c],[e,g],[i,p],[b,d],[f,h],[j,q]]
 [[a,e],[i,r],[b,f],[j,s],[c,g],[d,h]]
@@ -594,7 +595,7 @@ smallsort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T, i::T, j::T, p::T, q::T
 [[g,h],[i,j]]
 
 sort 15 values
-smallsort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T, i::T, j::T, p::T, q::T, r::T, s::T, t::T) where T
+sort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T, i::T, j::T, p::T, q::T, r::T, s::T, t::T) where T
 [[a,b],[c,d],[e,f],[g,h],[i,j],[p,q],[r,s]]
 [[a,c],[e,g],[i,p],[r,t],[b,d],[f,h],[j,q]]
 [[a,e],[i,r],[b,f],[j,s],[c,g],[p,t],[d,h]]
@@ -607,7 +608,7 @@ smallsort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T, i::T, j::T, p::T, q::T
 [[g,h],[i,j]]
 
 sort 16 values
-smallsort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T, i::T, j::T, p::T, q::T, r::T, s::T, t::T, u::T) where T
+sort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T, i::T, j::T, p::T, q::T, r::T, s::T, t::T, u::T) where T
 [[a,b],[c,d],[e,f],[g,h],[i,j],[p,q],[r,s],[t,u]]
 [[a,c],[e,g],[i,p],[r,t],[b,d],[f,h],[j,q],[s,u]]
 [[a,e],[i,r],[b,f],[j,s],[c,g],[p,t],[d,h],[q,u]]
@@ -620,7 +621,5 @@ smallsort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T, i::T, j::T, p::T, q::T
 [[g,h],[i,j]]
 
 =#
-#=
 
-=#
 end # module TinySorts
