@@ -279,8 +279,11 @@ end
 
 
 function sort(v::Vector{T}) where T
-   MIN_ITEMS <= length(v) <= MAX_ITEMS || throw(DomainError())
-   return sort(v...)
+   return if MIN_ITEMS <= length(v) <= MAX_ITEMS
+              sort(v...)
+          else
+              Base.sort(v)
+          end
 end
 
 if isdefined(:StaticArrays)   
