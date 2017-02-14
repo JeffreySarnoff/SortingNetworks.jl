@@ -9,9 +9,31 @@ const MAX_ITEMS = 9
    networks from http://pages.ripco.net/~jgamble/nw.html
 =#
 
+# sorting 1
+
 smallsort(a::T) where T = a
 
+#=
+sorting 2
+
+There are 1 comparators in this network,
+  grouped into 1 parallel operations.
+
+[[0,1]]
+=#
+
 smallsort(a::T, b::T) where T = minmax(a, b)
+
+#=
+sorting 3
+
+There are 3 comparators in this network,
+  grouped into 3 parallel operations.
+
+[[2,3]]
+[[1,3]]
+[[1,2]]
+=#
 
 function smallsort(a::T, b::T, c::T) where T
     b, c = minmax(b, c)
@@ -22,6 +44,10 @@ end
       
 #=
 sorting 4
+
+There are 5 comparators in this network,
+  grouped into 3 parallel operations.
+
 [[1,2],[3,4]]   step 1, 2 ops can be simultaneous
 [[1,3],[2,4]]   step 2, 2 ops can be simultaneous
 [[2,3]]         step 3
@@ -43,7 +69,7 @@ end
 sort 5 values
 
 There are 9 comparators in this network,
-grouped into 6 parallel operations.
+  grouped into 6 parallel operations.
 
 [[1,2],[4,5]]
 [[3,5]]
@@ -74,8 +100,9 @@ end
 
 #=
 sort 6 values
+
 There are 12 comparators in this network,
-grouped into 6 parallel operations.
+  grouped into 6 parallel operations.
 
 [[2,3],[5,6]]
 [[1,3],[4,6]]
@@ -150,8 +177,9 @@ end
 
 #=
 sort 8 values
+
 There are 19 comparators in this network,
-grouped into 7 parallel operations.
+  grouped into 7 parallel operations.
 
 [[1,2],[3,4],[5,6],[7,8]]
 [[1,3],[2,4],[5,7],[6,8]]
@@ -194,6 +222,9 @@ end
 
 #=
 sort 9 values
+
+There are 25 comparators in this network,
+  grouped into 9 parallel operations.
 
 [[1,2],[4,5],[7,8]]
 [[2,3],[5,6],[8,9]]
