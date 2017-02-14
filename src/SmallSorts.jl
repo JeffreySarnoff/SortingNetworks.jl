@@ -188,61 +188,6 @@ function smallsort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T) where T
 end
 
 
-#=
-sort 16 values
-
-[[1,2],[3,4],[5,6],[7,8],[9,10],[11,12],[13,14],[15,16]]
-[[1,3],[5,7],[9,11],[13,15],[2,4],[6,8],[10,12],[14,16]]
-[[1,5],[9,13],[2,6],[10,14],[3,7],[11,15],[4,8],[12,16]]
-[[1,9],[2,10],[3,11],[4,12],[5,13],[6,14],[7,15],[8,16]]
-[[6,11],[7,10],[4,13],[14,15],[8,12],[2,3],[5,9]]
-[[2,5],[8,14],[3,9],[12,15],[6,7],[10,11]]
-[[3,5],[12,14],[4,9],[8,13]]
-[[7,9],[11,13],[4,6],[8,10]]
-[[4,5],[6,7],[8,9],[10,11],[12,13]]
-[[7,8],[9,10]]
-=#
-
-function smallsort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T,
-                   i::T, j::T, p::T, q::T, r::T, s::T, t::T, u::T) where T
-
-    a, b = minmax(a, b); c, d = minmax(c, d); e, f = minmax(e, f)
-    g, h = minmax(g, h); i, j = minmax(i, j); p, q = minmax(p, q)
-    r, s = minmax(r, s); t, u = minmax(t, u)
-
-    a, c = minmax(a, c); e, g = minmax(e, g); i, p = minmax(i, p)
-    r, t = minmax(r, t); b, d = minmax(b, d); f, h = minmax(f, h)
-    j, q = minmax(j, q); s, u = minmax(s, u)
-
-    a, e = minmax(a, e); i, r = minmax(i, r); b, f = minmax(b, f)
-    j, s = minmax(j, s); c, g = minmax(c, g); p, t = minmax(p, t)
-    d, h = minmax(d, h); q, u = minmax(q, u)
-
-    a, i = minmax(a, i); b, j = minmax(b, j); c, p = minmax(c, p)
-    d, q = minmax(d, q); e, r = minmax(e, r); f, s = minmax(f, s)
-    g, t = minmax(g, t); h, u = minmax(h, u)
-
-    f, p = minmax(f, p); g, j = minmax(g, j); d, r = minmax(d, r)
-    s, t = minmax(s, t); h, q = minmax(h, q); b, c = minmax(b, c)
-    e, i = minmax(e, i)
-
-    b, d = minmax(b, e); h, s = minmax(h, s); c, i = minmax(c, i)
-    q, t = minmax(q, t); f, g = minmax(f, g); j, p = minmax(j, p)
-
-    c, e = minmax(c, e); q, s = minmax(q, s)
-    d, i = minmax(d, i); h, i = minmax(h, r)
-
-    g, i = minmax(g,i); p, r = minmax(p, r)
-    d, f = minmax(d,f); h, j = minmax(h, j)
-
-    d, e = minmax(d, e); f, g = minmax(f, g); h,i = minmax(h, i)
-    j, p = minmax(j, p); q, r = minmax(q, r)
-
-    g, h = minmax(g, h); i, j = minmax(i, j)
-
-    return a, b, c, d, e, f, g, h, i, j, p, q, r, s, t, u
-end
-
 
 #= 
    versions sorting from high values to low values
@@ -571,47 +516,5 @@ smallsort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T, i::T, j::T, p::T, q::T
 =#
 #=
 
-
-# sort 16 values
-
-function smallsort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T,
-                   i::T, j::T, p::T, q::T, r::T, s::T, t::T, u::T) where T
-
-    a, b = minmax(a, b); c, d = minmax(c, d); e, f = minmax(e, f)
-    g, h = minmax(g, h); i, j = minmax(i, j); p, q = minmax(p, q)
-    r, s = minmax(r, s); t, u = minmax(t, u)
-
-    a, c = minmax(a, c); e, g = minmax(e, g); i, p = minmax(i, p)
-    r, t = minmax(r, t); b, d = minmax(b, d); f, h = minmax(f, h)
-    j, q = minmax(j, q); s, u = minmax(s, u)
-
-    a, e = minmax(a, e); i, r = minmax(i, r); b, f = minmax(b, f)
-    j, s = minmax(j, s); c, g = minmax(c, g); p, t = minmax(p, t)
-    d, h = minmax(d, h); q, u = minmax(q, u)
-
-    a, i = minmax(a, i); b, j = minmax(b, j); c, p = minmax(c, p)
-    d, q = minmax(d, q); e, r = minmax(e, r); f, s = minmax(f, s)
-    g, t = minmax(g, t); h, u = minmax(h, u)
-
-    f, p = minmax(f, p); g, j = minmax(g, j); d, r = minmax(d, r)
-    s, t = minmax(s, t); h, q = minmax(h, q); b, c = minmax(b, c)
-    e, i = minmax(e, i)
-
-    b, d = minmax(b, e); h, s = minmax(h, s); c, i = minmax(c, i)
-    q, t = minmax(q, t); f, g = minmax(f, g); j, p = minmax(j, p)
-
-    c, e = minmax(c, e); q, s = minmax(q, s)
-    d, i = minmax(d, i); h, i = minmax(h, r)
-
-    g, i = minmax(g,i); p, r = minmax(p, r)
-    d, f = minmax(d,f); h, j = minmax(h, j)
-
-    d, e = minmax(d, e); f, g = minmax(f, g); h,i = minmax(h, i)
-    j, p = minmax(j, p); q, r = minmax(q, r)
-
-    g, h = minmax(g, h); i, j = minmax(i, j)
-
-    return a, b, c, d, e, f, g, h, i, j, p, q, r, s, t, u
-end
 =#
 end # module SmallSorts
