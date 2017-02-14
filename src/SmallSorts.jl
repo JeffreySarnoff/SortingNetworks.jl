@@ -16,7 +16,7 @@ function smallsort(a::T, b::T, c::T) where T
 end
 
 #=
-sorting 4 
+sorting 4
 [[1,2],[3,4]]   step 1, 2 ops can be simultaneous
 [[1,3],[2,4]]   step 2, 2 ops can be simultaneous
 [[2,3]]         step 3
@@ -25,12 +25,12 @@ sorting 4
 function smallsort(a::T, b::T, c::T, d::T) where T
     a, b = minmax(a, b)
     c, d = minmax(c, d)
-    
+
     a, c = minmax(a, c)
     b, d = minmax(b, d)
-    
+
     b, c = minmax(b, c)
-    
+
     return a, b, c, d
 end
 
@@ -51,17 +51,17 @@ grouped into 6 parallel operations.
 function smallsort(a::T, b::T, c::T, d::T, e::T) where T
     a, b = minmax(a, b)
     d, e = minmax(d, e)
-    
+
     c, e = minmax(c, e)
 
     c, d = minmax(c, d)
     b, e = minmax(b, e)
-    
+
     a, d = minmax(a, d)
-    
+
     a, c = minmax(a, c)
     b, d = minmax(b, d)
-    
+
     b, c = minmax(b, c)
 
     return a, b, c, d, e
@@ -83,20 +83,20 @@ grouped into 6 parallel operations.
 function smallsort(a::T, b::T, c::T, d::T, e::T, f::T) where T
     b, c = minmax(b, c)
     e, f = minmax(e, f)
-    
+
     a, c = minmax(a, c)
     d, f = minmax(d, f)
 
     a, b = minmax(a, b)
     d, e = minmax(d, e)
     c, f = minmax(c, f)
-    
+
     a, d = minmax(a, d)
     b, e = minmax(b, e)
-    
+
     c, e = minmax(c, e)
     b, d = minmax(b, d)
-    
+
     c, d = minmax(c, d)
 
     return a, b, c, d, e, f
@@ -120,7 +120,7 @@ function smallsort(a::T, b::T, c::T, d::T, e::T, f::T, g::T) where T
     b, c = minmax(b, c)
     d, e = minmax(d, e)
     f, g = minmax(f, g)
-    
+
     a, c = minmax(a, c)
     d, f = minmax(d, f)
     e, g = minmax(e, g)
@@ -128,13 +128,13 @@ function smallsort(a::T, b::T, c::T, d::T, e::T, f::T, g::T) where T
     a, b = minmax(a, b)
     e, f = minmax(e, f)
     c, g = minmax(c, g)
-    
+
     a, e = minmax(a, e)
     b, f = minmax(b, f)
-    
+
     a, d = minmax(a, d)
     c, f = minmax(c, f)
-    
+
     b, d = minmax(b, d)
     c, e = minmax(c, e)
 
@@ -162,7 +162,7 @@ function smallsort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T) where T
     c, d = minmax(c, d)
     e, f = minmax(e, f)
     g, h = minmax(g, h)
-    
+
     a, c = minmax(a, c)
     b, d = minmax(b, d)
     e, g = minmax(e, g)
@@ -172,13 +172,13 @@ function smallsort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T) where T
     f, g = minmax(f, g)
     a, e = minmax(a, e)
     d, h = minmax(d, h)
-    
+
     b, f = minmax(b, f)
     c, g = minmax(c, g)
-    
+
     b, e = minmax(b, e)
     d, g = minmax(d, g)
-    
+
     c, e = minmax(c, e)
     d, f = minmax(d, f)
 
