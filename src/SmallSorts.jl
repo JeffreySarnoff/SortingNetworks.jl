@@ -14,7 +14,7 @@ function smallsort(a::T, b::T, c::T) where T
     a, b = minmax(a, b)
     return a, b, c
 end
-
+      
 #=
 sorting 4
 [[1,2],[3,4]]   step 1, 2 ops can be simultaneous
@@ -185,6 +185,41 @@ function smallsort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T) where T
     d, e = minmax(d, e)
 
     return a, b, c, d, e, f. g, h
+end
+
+#= 
+   versions sorting from high values to low values
+=#
+function smallsort_reverse(a::T) where T
+    return a
+end      
+function smallsort_reverse(a::T, b::T) where T
+    a, b = minmax(a, b)
+    return b, a
+end      
+function smallsort_reverse(a::T, b::T, c::T) where T
+    a, b, c = smallsort(a, b, c)
+    return c, b, a
+end      
+function smallsort_reverse(a::T, b::T, c::T, d::T) where T
+    a ,b, c, d = smallsort(a, b, c, d)
+    return d, c, b, a
+end
+function smallsort_reverse(a::T, b::T, c::T, d::T, e::T) where T
+    a, b, c, d, e = smallsort(a, b, c, d, e)
+    return e, d, c, b, a
+end
+function smallsort_reverse(a::T, b::T, c::T, d::T, e::T, f::T) where T
+    a, b, c, d, e, f = smallsort(a, b, c, d, e, f)
+    return f, e, d, c, b, a
+end
+function smallsort_reverse(a::T, b::T, c::T, d::T, e::T, f::T, g::T) where T
+    a, b, c, d, e, f, g = smallsort(a, b, c, d, e, f, g)
+    return g, f, e, d, c, b, a
+end
+function smallsort_reverse(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T) where T
+    a, b, c, d, e, f, g, h = smallsort(a, b, c, d, e, f, g, h)
+    return h, g, f, e, d, c, b, a
 end
 
 #=
