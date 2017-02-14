@@ -277,12 +277,15 @@ function sort(a::T, b::T, c::T, d::T, e::T,
     return a, b, c, d, e, f, g, h, i
 end
 
+for N in collect(MIN_ITEMS:MAX_ITEMS)
+   @eval sort(x::NTuple{$N, T}) where T = sort(x...)
+end   
 
 function sort(v::Vector{T}) where T
    return if MIN_ITEMS <= length(v) <= MAX_ITEMS
-              sort(v...)
+              [sort(v...)...]
           else
-              Base.sort(v)
+              sort(v, rev=false)
           end
 end
 
@@ -294,9 +297,6 @@ if isdefined(:StaticArrays)
   end
 end
 
-for N in collect(MIN_ITEMS:MAX_ITEMS)
-   @eval sort(x::NTuple{$N, T}) where T = sort(x...)
-end   
 
 #= 
    versions sorting from high values to low values
