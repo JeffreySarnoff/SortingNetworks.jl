@@ -143,4 +143,49 @@ function smallsort(a::T, b::T, c::T, d::T, e::T, f::T, g::T) where T
     return a, b, c, d, e, f. g
 end
 
+#=
+sort 8 values
+There are 19 comparators in this network,
+grouped into 7 parallel operations.
+
+[[1,2],[3,4],[5,6],[7,8]]
+[[1,3],[2,4],[5,7],[6,8]]
+[[2,3],[6,7],[1,5],[4,8]]
+[[2,6],[3,7]]
+[[2,5],[4,7]]
+[[3,5],[4,6]]
+[[4,5]]
+=#
+
+function smallsort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T) where T
+    a, b = minmax(a, b)
+    c, d = minmax(c, d)
+    e, f = minmax(e, f)
+    g, h = minmax(g, h)
+    
+    a, c = minmax(a, c)
+    b, d = minmax(b, d)
+    e, g = minmax(e, g)
+    f, h = minmax(f, h)
+
+    b, c = minmax(b, c)
+    f, g = minmax(f, g)
+    a, e = minmax(a, e)
+    d, h = minmax(d, h)
+    
+    b, f = minmax(b, f)
+    c, g = minmax(c, g)
+    
+    b, e = minmax(b, e)
+    d, g = minmax(d, g)
+    
+    c, e = minmax(c, e)
+    d, f = minmax(d, f)
+
+    d, e = minmax(d, e)
+
+    return a, b, c, d, e, f. g, h
+end
+
+
 end # module SmallSorts
