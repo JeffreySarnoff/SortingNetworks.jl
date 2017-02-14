@@ -1,9 +1,16 @@
 module TinySorts
 
-import Base: sort
+import Base: minmax, sort
 
 const MIN_ITEMS = 1
 const MAX_ITEMS = 9
+
+function minmax(a::T, b::T) where T<:Number
+    return (b < a) ? (b, a), (a, b)
+end
+function minmax(a::T, b::T) where T
+    return isless(b, a) ? (b, a), (a, b)
+end
 
 #=
    networks from http://pages.ripco.net/~jgamble/nw.html
