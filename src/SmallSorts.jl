@@ -2,6 +2,9 @@ module SmallSorts
 
 export smallsort
 
+const MIN_ITEMS = 1
+const MAX_ITEMS = 9
+
 #=
    networks from http://pages.ripco.net/~jgamble/nw.html
 =#
@@ -189,21 +192,65 @@ function smallsort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T) where T
     return a, b, c, d, e, f, g, h
 end
 
+#=
+sort 9 values
+
+[[1,2],[4,5],[7,8]]
+[[2,3],[5,6],[8,9]]
+[[1,2],[4,5],[7,8],[3,6]]
+[[1,4],[2,5],[6,9]]
+[[4,7],[5,8],[3,6]]
+[[1,4],[2,5],[6,8],[3,7]]
+[[2,4],[5,7]]
+[[3,5],[6,7]]
+[[3,4]]
+=#
+
+function smallsort(a::T, b::T, c::T, d::T, e::T,  
+                   f::T, g::T, h::T, i::T) where T
+
+    a, b = minmax(a, b); d, e = minmax(d, e)
+    g, h = minmax(g, h)
+
+    b, c = minmax(b, c); e, f = minmax(e, f)
+    h, i = minmax(h, i)
+
+    a, b = minmax(a, b); d, e = minmax(d, e)
+    g, h = minmax(g, h); c, f = minmax(c, f)
+
+    a, d = minmax(a, d); b, e = minmax(b, e)
+    f, i = minmax(f, i)
+
+    d, g = minmax(d, g); e, h = minmax(e, h)
+    c, f = minmax(c, f)
+
+    a, d = minmax(a, d); b, e = minmax(b, e)
+    f, h = minmax(f, h); c, g = minmax(c, g)
+
+    b, d = minmax(b, d); e, g = minmax(e, g)
+
+    c, e = minmax(c, e); f, g = minmax(f, g)
+
+    c, d = minmax(c, d)
+
+    return a, b, c, d, e, f, g, h, i
+end
+
 
 function smallsort(v::Vector{T}) where T
-   0 < length(v) <= 8 || throw(DomainError())
+   MIN_ITEMS <= length(v) <= MAX_ITEMS || throw(DomainError())
    return smallsort(v...)
 end
 
 if isdefined(:StaticArrays)   
   function smallsort(sv::SVector)
      n = length(sv)
-     0 < length(v) <= 8 || throw(DomainError())
+     MIN_ITEMS <= length(v) <= MAX_ITEMS || throw(DomainError())
      return SVector{n}( smallsort(x.data)... )
   end
 end
 
-for N in collect(1:8)
+for N in collect(MIN_ITEMS:MAX_ITEMS)
    @eval smallsort(x::NTuple{$N, T}) where T = smallsort(x...)
 end   
 
