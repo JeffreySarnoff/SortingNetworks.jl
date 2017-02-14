@@ -75,7 +75,7 @@ grouped into 6 parallel operations.
 [[2,3],[5,6]]
 [[1,3],[4,6]]
 [[1,2],[4,5],[3,6]]
-[[1,3],[2,5]]
+[[1,4],[2,5]]
 [[3,5],[2,4]]
 [[3,4]]
 =#
@@ -91,7 +91,7 @@ function smallsort(a::T, b::T, c::T, d::T, e::T, f::T) where T
     d, e = minmax(d, e)
     c, f = minmax(c, f)
     
-    a, c = minmax(a, c)
+    a, d = minmax(a, d)
     b, e = minmax(b, e)
     
     c, e = minmax(c, e)
