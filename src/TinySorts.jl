@@ -18,7 +18,7 @@ end
 
 # sorting 1
 
-sort(a::T) where T = a
+(sort(a::T) where T) = a
 
 #=
 sorting 2
