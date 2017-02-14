@@ -187,7 +187,9 @@ function smallsort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T) where T
     return a, b, c, d, e, f. g, h
 end
 
-
+for N in collect(1:8)
+   @eval smallsort(x::NTuple{$N, T}) where T = smallsort(x...)
+end   
 
 #= 
    versions sorting from high values to low values
