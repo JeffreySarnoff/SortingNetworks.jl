@@ -209,27 +209,37 @@ sort 9 values
 function smallsort(a::T, b::T, c::T, d::T, e::T,  
                    f::T, g::T, h::T, i::T) where T
 
-    a, b = minmax(a, b); d, e = minmax(d, e)
+    a, b = minmax(a, b)
+    d, e = minmax(d, e)
     g, h = minmax(g, h)
 
-    b, c = minmax(b, c); e, f = minmax(e, f)
+    b, c = minmax(b, c)
+    e, f = minmax(e, f)
     h, i = minmax(h, i)
 
-    a, b = minmax(a, b); d, e = minmax(d, e)
-    g, h = minmax(g, h); c, f = minmax(c, f)
-
-    a, d = minmax(a, d); b, e = minmax(b, e)
-    f, i = minmax(f, i)
-
-    d, g = minmax(d, g); e, h = minmax(e, h)
+    a, b = minmax(a, b)
+    d, e = minmax(d, e)
+    g, h = minmax(g, h)
     c, f = minmax(c, f)
 
-    a, d = minmax(a, d); b, e = minmax(b, e)
-    f, h = minmax(f, h); c, g = minmax(c, g)
+    a, d = minmax(a, d)
+    b, e = minmax(b, e)
+    f, i = minmax(f, i)
 
-    b, d = minmax(b, d); e, g = minmax(e, g)
+    d, g = minmax(d, g)
+    e, h = minmax(e, h)
+    c, f = minmax(c, f)
 
-    c, e = minmax(c, e); f, g = minmax(f, g)
+    a, d = minmax(a, d)
+    b, e = minmax(b, e)
+    f, h = minmax(f, h)
+    c, g = minmax(c, g)
+
+    b, d = minmax(b, d)
+    e, g = minmax(e, g)
+
+    c, e = minmax(c, e)
+    f, g = minmax(f, g)
 
     c, d = minmax(c, d)
 
