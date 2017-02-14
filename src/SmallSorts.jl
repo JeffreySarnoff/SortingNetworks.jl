@@ -7,7 +7,9 @@ export smallsort
 =#
 
 smallsort(a::T) where T = a
+
 smallsort(a::T, b::T) where T = minmax(a, b)
+
 function smallsort(a::T, b::T, c::T) where T
     b, c = minmax(b, c)
     a, c = minmax(a, c)
@@ -185,6 +187,20 @@ function smallsort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T) where T
     d, e = minmax(d, e)
 
     return a, b, c, d, e, f. g, h
+end
+
+
+function smallsort(v::Vector{T}) where T
+   0 < length(v) <= 8 || throw(DomainError())
+   return smallsort(v...)
+end
+
+if isdefined(:StaticArrays)   
+  function smallsort(sv::SVector)
+     n = length(sv)
+     0 < length(v) <= 8 || throw(DomainError())
+     return SVector{n}( smallsort(x.data)... )
+  end
 end
 
 for N in collect(1:8)
