@@ -1,6 +1,6 @@
-module SmallSorts
+module TinySorts
 
-export smallsort
+import Base: sort
 
 const MIN_ITEMS = 1
 const MAX_ITEMS = 9
@@ -11,7 +11,7 @@ const MAX_ITEMS = 9
 
 # sorting 1
 
-smallsort(a::T) where T = a
+sort(a::T) where T = a
 
 #=
 sorting 2
@@ -22,7 +22,7 @@ There are 1 comparators in this network,
 [[0,1]]
 =#
 
-smallsort(a::T, b::T) where T = minmax(a, b)
+sort(a::T, b::T) where T = minmax(a, b)
 
 #=
 sorting 3
@@ -35,7 +35,7 @@ There are 3 comparators in this network,
 [[1,2]]
 =#
 
-function smallsort(a::T, b::T, c::T) where T
+function sort(a::T, b::T, c::T) where T
     b, c = minmax(b, c)
     a, c = minmax(a, c)
     a, b = minmax(a, b)
@@ -53,7 +53,7 @@ There are 5 comparators in this network,
 [[2,3]]         step 3
 =#
 
-function smallsort(a::T, b::T, c::T, d::T) where T
+function sort(a::T, b::T, c::T, d::T) where T
     a, b = minmax(a, b)
     c, d = minmax(c, d)
 
@@ -79,7 +79,7 @@ There are 9 comparators in this network,
 [[2,3]]
 =#
 
-function smallsort(a::T, b::T, c::T, d::T, e::T) where T
+function sort(a::T, b::T, c::T, d::T, e::T) where T
     a, b = minmax(a, b)
     d, e = minmax(d, e)
 
@@ -112,7 +112,7 @@ There are 12 comparators in this network,
 [[3,4]]
 =#
 
-function smallsort(a::T, b::T, c::T, d::T, e::T, f::T) where T
+function sort(a::T, b::T, c::T, d::T, e::T, f::T) where T
     b, c = minmax(b, c)
     e, f = minmax(e, f)
 
@@ -148,7 +148,7 @@ grouped into 7 parallel operations.
 [[3,4]]
 =#
 
-function smallsort(a::T, b::T, c::T, d::T, e::T, f::T, g::T) where T
+function sort(a::T, b::T, c::T, d::T, e::T, f::T, g::T) where T
     b, c = minmax(b, c)
     d, e = minmax(d, e)
     f, g = minmax(f, g)
@@ -190,7 +190,7 @@ There are 19 comparators in this network,
 [[4,5]]
 =#
 
-function smallsort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T) where T
+function sort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T) where T
     a, b = minmax(a, b)
     c, d = minmax(c, d)
     e, f = minmax(e, f)
@@ -237,8 +237,8 @@ There are 25 comparators in this network,
 [[3,4]]
 =#
 
-function smallsort(a::T, b::T, c::T, d::T, e::T,  
-                   f::T, g::T, h::T, i::T) where T
+function sort(a::T, b::T, c::T, d::T, e::T,  
+              f::T, g::T, h::T, i::T) where T
 
     a, b = minmax(a, b)
     d, e = minmax(d, e)
@@ -278,13 +278,13 @@ function smallsort(a::T, b::T, c::T, d::T, e::T,
 end
 
 
-function smallsort(v::Vector{T}) where T
+function sort(v::Vector{T}) where T
    MIN_ITEMS <= length(v) <= MAX_ITEMS || throw(DomainError())
    return smallsort(v...)
 end
 
 if isdefined(:StaticArrays)   
-  function smallsort(sv::SVector)
+  function sort(sv::SVector)
      n = length(sv)
      MIN_ITEMS <= length(v) <= MAX_ITEMS || throw(DomainError())
      return SVector{n}( smallsort(x.data)... )
@@ -292,41 +292,41 @@ if isdefined(:StaticArrays)
 end
 
 for N in collect(MIN_ITEMS:MAX_ITEMS)
-   @eval smallsort(x::NTuple{$N, T}) where T = smallsort(x...)
+   @eval sort(x::NTuple{$N, T}) where T = smallsort(x...)
 end   
 
 #= 
    versions sorting from high values to low values
 =#
-function smallsort_reverse(a::T) where T
+function sort_reverse(a::T) where T
     return a
 end      
-function smallsort_reverse(a::T, b::T) where T
+function sort_reverse(a::T, b::T) where T
     a, b = minmax(a, b)
     return b, a
 end      
-function smallsort_reverse(a::T, b::T, c::T) where T
-    a, b, c = smallsort(a, b, c)
+function sort_reverse(a::T, b::T, c::T) where T
+    a, b, c = sort(a, b, c)
     return c, b, a
 end      
-function smallsort_reverse(a::T, b::T, c::T, d::T) where T
-    a ,b, c, d = smallsort(a, b, c, d)
+function sort_reverse(a::T, b::T, c::T, d::T) where T
+    a ,b, c, d = sort(a, b, c, d)
     return d, c, b, a
 end
-function smallsort_reverse(a::T, b::T, c::T, d::T, e::T) where T
-    a, b, c, d, e = smallsort(a, b, c, d, e)
+function sort_reverse(a::T, b::T, c::T, d::T, e::T) where T
+    a, b, c, d, e = sort(a, b, c, d, e)
     return e, d, c, b, a
 end
-function smallsort_reverse(a::T, b::T, c::T, d::T, e::T, f::T) where T
-    a, b, c, d, e, f = smallsort(a, b, c, d, e, f)
+function sort_reverse(a::T, b::T, c::T, d::T, e::T, f::T) where T
+    a, b, c, d, e, f = sort(a, b, c, d, e, f)
     return f, e, d, c, b, a
 end
-function smallsort_reverse(a::T, b::T, c::T, d::T, e::T, f::T, g::T) where T
-    a, b, c, d, e, f, g = smallsort(a, b, c, d, e, f, g)
+function sort_reverse(a::T, b::T, c::T, d::T, e::T, f::T, g::T) where T
+    a, b, c, d, e, f, g = sort(a, b, c, d, e, f, g)
     return g, f, e, d, c, b, a
 end
-function smallsort_reverse(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T) where T
-    a, b, c, d, e, f, g, h = smallsort(a, b, c, d, e, f, g, h)
+function sort_reverse(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T) where T
+    a, b, c, d, e, f, g, h = sort(a, b, c, d, e, f, g, h)
     return h, g, f, e, d, c, b, a
 end
 
@@ -623,4 +623,4 @@ smallsort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T, i::T, j::T, p::T, q::T
 #=
 
 =#
-end # module SmallSorts
+end # module TinySorts
