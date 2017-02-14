@@ -142,7 +142,7 @@ function smallsort(a::T, b::T, c::T, d::T, e::T, f::T, g::T) where T
 
     c, d = minmax(c, d)
 
-    return a, b, c, d, e, f. g
+    return a, b, c, d, e, f, g
 end
 
 #=
@@ -186,7 +186,7 @@ function smallsort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T) where T
 
     d, e = minmax(d, e)
 
-    return a, b, c, d, e, f. g, h
+    return a, b, c, d, e, f, g, h
 end
 
 
