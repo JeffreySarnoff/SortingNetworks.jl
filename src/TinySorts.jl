@@ -3,7 +3,7 @@ module TinySorts
 import Base: minmax, sort
 
 const MIN_ITEMS = 1
-const MAX_ITEMS = 9
+const MAX_ITEMS = 24
 
 function minmax(a::T, b::T) where T<:Number
     return (b < a) ? (b, a) : (a, b)
@@ -331,6 +331,10 @@ function sort(a::T,b::T,c::T,d::T,e::T,f::T,g::T,h::T,i::T,j::T) with T
     return a,b,c,d,e,f,g,h,i,j
 end
 
+#=
+sort 11 values
+=#
+
 
 #=
 sort 12 values
@@ -388,6 +392,11 @@ function sort(a::T,b::T,c::T,d::T,e::T,f::T,g::T,h::T,i::T,j::T) with T
 
     return a,b,c,d,e,f,g,h,i,j
 end
+
+#=
+sort 13 values
+=#
+
 
 #=
 sort 14 values
@@ -458,6 +467,11 @@ function sort(a::T,b::T,c::T,d::T,e::T,f::T,g::T,h::T,i::T,j::T,k::T) with T
 
     return a,b,c,d,e,f,g,h,i,j,k
 end
+
+#=
+sort 15 values
+=#
+
 
 #=
 sort 16 values
@@ -537,6 +551,10 @@ function sort(a::T,b::T,c::T,d::T,e::T,f::T,g::T,h::T,i::T,j::T,k::T) with T
 
     return a,b,c,d,e,f,g,h,i,j,k
 end
+
+#=
+sort 17 values
+=#
 
 #=
 sort 18 values
@@ -658,6 +676,10 @@ function sort(a::T,b::T,c::T,d::T,e::T,f::T,g::T,h::T,i::T,j::T,
 
     return a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u
 end
+
+#=
+sort 19 values
+=#
 
 
 #=
@@ -1110,6 +1132,9 @@ function sort(a::T,b::T,c::T,d::T,e::T,f::T,g::T,h::T,i::T,j::T,
 end
 
 
+#=
+sort 23 values
+=#
 
 
 #=
