@@ -284,357 +284,53 @@ function sort(a::T, b::T, c::T, d::T, e::T,
     return a, b, c, d, e, f, g, h, i
 end
 
-for N in collect(MIN_ITEMS:MAX_ITEMS)
-   @eval sort(x::NTuple{$N, T}) where T = sort(x...)
-end   
+#=
+sort 10 values
+=#
 
-function sort(v::Vector{T}) where T
-   return if MIN_ITEMS <= length(v) <= MAX_ITEMS
-              [sort(v...)...]
-          else
-              sort(v, rev=false)
-          end
-end
+function sort(a::T,b::T,c::T,d::T,e::T,f::T,g::T,h::T,i::T,j::T) with T
 
-if isdefined(:StaticArrays)   
-  function sort(sv::SVector)
-     n = length(sv)
-     return if MIN_ITEMS <= n <= MAX_ITEMS
-                SVector{n}( sort(x.data)... )
-            else
-                sort(v, rev=false)
-            end
-  end
-end
+    e, j = minmax(e, j)
+    d, i = minmax(d, i)
+    c, h = minmax(c, h)
+    b, g = minmax(b, g)
+    a, f = minmax(a, f)
 
+    b, e = minmax(b, e)
+    g, j = minmax(g, j)
+    a, d = minmax(a, d)
+    f, i = minmax(f, i)
 
-#= 
-   versions sorting from high values to low values
+    a, c = minmax(a, c)
+    d, g = minmax(d, g)
+    h, j = minmax(h, j)
 
-function sort_reverse(a::T) where T
-    return a
-end      
-function sort_reverse(a::T, b::T) where T
     a, b = minmax(a, b)
-    return b, a
-end      
-function sort_reverse(a::T, b::T, c::T) where T
-    a, b, c = sort(a, b, c)
-    return c, b, a
-end      
-function sort_reverse(a::T, b::T, c::T, d::T) where T
-    a ,b, c, d = sort(a, b, c, d)
-    return d, c, b, a
+    c, e = minmax(c, e)
+    f, h = minmax(f, h)
+    i, j = minmax(i, j)
+
+    b, c = minmax(b, c)
+    e, g = minmax(e, g)
+    h, i = minmax(h, i)
+    d, f = minmax(d, f)
+
+    c, f = minmax(c, f)
+    g, i = minmax(g, i)
+    b, d = minmax(b, d)
+    e, h = minmax(e, h)
+
+    c, d = minmax(c, d)
+    g, h = minmax(g, h)
+
+    d, e = minmax(d, e)
+    f, g = minmax(f, g)
+
+    e, f = minmax(e, f)
+
+    return a,b,c,d,e,f,g,h,i,j
 end
-function sort_reverse(a::T, b::T, c::T, d::T, e::T) where T
-    a, b, c, d, e = sort(a, b, c, d, e)
-    return e, d, c, b, a
-end
-function sort_reverse(a::T, b::T, c::T, d::T, e::T, f::T) where T
-    a, b, c, d, e, f = sort(a, b, c, d, e, f)
-    return f, e, d, c, b, a
-end
-function sort_reverse(a::T, b::T, c::T, d::T, e::T, f::T, g::T) where T
-    a, b, c, d, e, f, g = sort(a, b, c, d, e, f, g)
-    return g, f, e, d, c, b, a
-end
-function sort_reverse(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T) where T
-    a, b, c, d, e, f, g, h = sort(a, b, c, d, e, f, g, h)
-    return h, g, f, e, d, c, b, a
-end
-=#
 
-#=
-sort 3 values
-[[2,3]]
-[[1,3]]
-[[1,2]]
-
-sort 4 values
-[[1,2],[3,4]]
-[[1,3],[2,4]]
-[[2,3]]
-
-sort 5 vaiues
-[[1,2],[4,5]]
-[[3,5]]
-[[3,4],[2,5]]
-[[1,4]]
-[[1,3],[2,4]]
-[[2,3]]
-
-sort 6 values
-[[2,3],[5,6]]
-[[1,3],[4,6]]
-[[1,2],[4,5],[3,6]]
-[[1,4],[2,5]]
-[[3,5],[2,4]]
-[[3,4]]
-
-sort 7 values
-[[2,3],[4,5],[6,7]]
-[[1,3],[4,6],[5,7]]
-[[1,2],[5,6],[3,7]]
-[[1,5],[2,6]]
-[[1,4],[3,6]]
-[[2,4],[3,5]]
-[[3,4]]
-
-sort 8 values
-[[1,2],[3,4],[5,6],[7,8]]
-[[1,3],[2,4],[5,7],[6,8]]
-[[2,3],[6,7],[1,5],[4,8]]
-[[2,6],[3,7]]
-[[2,5],[4,7]]
-[[3,5],[4,6]]
-[[4,5]]
-
-sort 9 values
-[[1,2],[4,5],[7,8]]
-[[2,3],[5,6],[8,9]]
-[[1,2],[4,5],[7,8],[3,6]]
-[[1,4],[2,5],[6,9]]
-[[4,7],[5,8],[3,6]]
-[[1,4],[2,5],[6,8],[3,7]]
-[[2,4],[5,7]]
-[[3,5],[6,7]]
-[[3,4]]
-
-sort 10 values
-[[5,10],[4,9],[3,8],[2,7],[1,6]]
-[[2,5],[7,10],[1,4],[6,9]]
-[[1,3],[4,7],[8,10]]
-[[1,2],[3,5],[6,8],[9,10]]
-[[2,3],[5,7],[8,9],[4,6]]
-[[3,6],[7,9],[2,4],[5,8]]
-[[3,4],[7,8]]
-[[4,5],[6,7]]
-[[5,6]]
-
-sort 11 values
-[[1,2],[3,4],[5,6],[7,8],[9,10]]
-[[2,4],[6,8],[1,3],[5,7],[9,11]]
-[[2,3],[6,7],[10,11],[1,5],[4,8]]
-[[2,6],[7,11],[5,9]]
-[[6,10],[3,7],[1,5],[4,9]]
-[[2,6],[7,11],[3,4],[9,10]]
-[[2,5],[8,11],[4,6],[7,9]]
-[[3,5],[8,10],[6,7]]
-[[4,5],[8,9]]
-
-sort 12 values
-[[1,2],[3,4],[5,6],[7,8],[9,10],[11,12]]
-[[2,4],[6,8],[10,12],[1,3],[5,7],[9,11]]
-[[2,3],[6,7],[10,11],[1,5],[8,12]]
-[[2,6],[7,11],[4,8],[5,9]]
-[[6,10],[3,7],[1,5],[8,12],[4,9]]
-[[2,6],[7,11],[3,4],[9,10]]
-[[2,5],[8,11],[4,6],[7,9]]
-[[3,5],[8,10],[6,7]]
-[[4,5],[8,9]]
-
-sort 13 values
-[[2,8],[10,12],[4,5],[6,9],[1,13],[3,7]]
-[[1,2],[3,4],[5,7],[9,12],[8,13],[6,10]]
-[[1,3],[4,8],[11,12],[2,5],[7,13]]
-[[8,9],[12,13],[5,10],[7,11]]
-[[4,5],[6,7],[9,10],[11,12],[2,8]]
-[[3,7],[10,12],[2,4],[5,8],[9,11],[1,6]]
-[[3,6],[7,9],[10,11]]
-[[2,3],[4,6],[8,9],[5,7]]
-[[3,4],[5,6],[7,8],[9,10]]
-[[4,5],[6,7]]
-
-sort 14 values
-[[1,2],[3,4],[5,6],[7,8],[9,10],[11,12],[13,14]]
-[[1,3],[5,7],[9,11],[2,4],[6,8],[10,12]]
-[[1,5],[9,13],[2,6],[10,14],[3,7],[4,8]]
-[[1,9],[2,10],[3,11],[4,12],[5,13],[6,14]]
-[[6,11],[7,10],[4,13],[8,12],[2,3],[5,9]]
-[[2,5],[8,14],[3,9],[6,7],[10,11]]
-[[3,5],[12,14],[4,9],[8,13]]
-[[7,9],[11,13],[4,6],[8,10]]
-[[4,5],[6,7],[8,9],[10,11],[12,13]]
-[[7,8],[9,10]]
-
-sort 15 values
-[[1,2],[3,4],[5,6],[7,8],[9,10],[11,12],[13,14]]
-[[1,3],[5,7],[9,11],[13,15],[2,4],[6,8],[10,12]]
-[[1,5],[9,13],[2,6],[10,14],[3,7],[11,15],[4,8]]
-[[1,9],[2,10],[3,11],[4,12],[5,13],[6,14],[7,15]]
-[[6,11],[7,10],[4,13],[14,15],[8,12],[2,3],[5,9]]
-[[2,5],[8,14],[3,9],[12,15],[6,7],[10,11]]
-[[3,5],[12,14],[4,9],[8,13]]
-[[7,9],[11,13],[4,6],[8,10]]
-[[4,5],[6,7],[8,9],[10,11],[12,13]]
-[[7,8],[9,10]]
-
-sort 16 values
-[[1,2],[3,4],[5,6],[7,8],[9,10],[11,12],[13,14],[15,16]]
-[[1,3],[5,7],[9,11],[13,15],[2,4],[6,8],[10,12],[14,16]]
-[[1,5],[9,13],[2,6],[10,14],[3,7],[11,15],[4,8],[12,16]]
-[[1,9],[2,10],[3,11],[4,12],[5,13],[6,14],[7,15],[8,16]]
-[[6,11],[7,10],[4,13],[14,15],[8,12],[2,3],[5,9]]
-[[2,5],[8,14],[3,9],[12,15],[6,7],[10,11]]
-[[3,5],[12,14],[4,9],[8,13]]
-[[7,9],[11,13],[4,6],[8,10]]
-[[4,5],[6,7],[8,9],[10,11],[12,13]]
-[[7,8],[9,10]]
-
-=#
-
-#=
-sort 3 values
-sort(a::T, b::T, c::T) where T
-[[b,c]]
-[[a,c]]
-[[a,b]]
-
-sort 4 values
-sort(a::T, b::T, c::T, d::T) where T
-[[a,b],[c,d]]
-[[a,c],[b,d]]
-[[b,c]]
-
-sort 5 vaiues
-sort(a::T, b::T, c::T, d::T, e::T) where T
-[[a,b],[d,e]]
-[[c,e]]
-[[c,d],[b,e]]
-[[a,d]]
-[[a,c],[b,d]]
-[[b,c]]
-
-sort 6 values
-sort(a::T, b::T, c::T, d::T, e::T, f::T) where T
-[[b,c],[e,f]]
-[[a,c],[d,f]]
-[[a,b],[d,e],[c,f]]
-[[a,d],[b,e]]
-[[c,e],[b,d]]
-[[c,d]]
-
-sort 7 values
-sort(a::T, b::T, c::T, d::T, e::T, f::T, g::T) where T
-[[b,c],[d,e],[f,g]]
-[[a,c],[d,f],[e,g]]
-[[a,b],[e,f],[c,g]]
-[[a,e],[b,f]]
-[[a,d],[c,f]]
-[[b,d],[c,e]]
-[[c,d]]
-
-sort 8 values
-sort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T) where T
-[[a,b],[c,d],[e,f],[g,h]]
-[[a,c],[b,d],[e,g],[f,h]]
-[[b,c],[f,g],[a,e],[d,h]]
-[[b,f],[c,g]]
-[[b,e],[d,g]]
-[[c,e],[d,f]]
-[[d,e]]
-
-sort 9 values
-sort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T, i::T) where T
-[[a,b],[d,e],[g,h]]
-[[b,c],[e,f],[h,i]]
-[[a,b],[d,e],[g,h],[c,f]]
-[[a,d],[b,e],[f,i]]
-[[d,g],[e,h],[c,f]]
-[[a,d],[b,e],[f,h],[c,g]]
-[[b,d],[e,g]]
-[[c,e],[f,g]]
-[[c,d]]
-
-sort 10 values
-sort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T, i::T, j::T) where T
-[[e,j],[d,i],[c,h],[b,g],[a,f]]
-[[b,e],[g,j],[a,d],[f,i]]
-[[a,c],[d,g],[h,j]]
-[[a,b],[c,e],[f,h],[i,j]]
-[[b,c],[e,g],[h,i],[d,f]]
-[[c,f],[g,i],[b,d],[e,h]]
-[[c,d],[g,h]]
-[[d,e],[f,g]]
-[[e,f]]
-
-sort 11 values
-sort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T, i::T, j::T, p::T) where T
-[[a,b],[c,d],[e,f],[g,h],[i,j]]
-[[b,d],[f,h],[a,c],[e,g],[i,p]]
-[[b,c],[f,g],[j,p],[a,e],[d,h]]
-[[b,f],[g,p],[e,i]]
-[[f,j],[c,g],[a,e],[d,i]]
-[[b,f],[g,p],[c,d],[i,j]]
-[[b,e],[h,p],[d,f],[g,i]]
-[[c,e],[h,j],[f,g]]
-[[d,e],[h,i]]
-
-sort 12 values
-sort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T, i::T, j::T, p::T, q::T) where T
-[[a,b],[c,d],[e,f],[g,h],[i,j],[p,q]]
-[[b,d],[f,h],[j,q],[a,c],[e,g],[i,p]]
-[[b,c],[f,g],[j,p],[a,e],[h,q]]
-[[b,f],[g,p],[d,h],[e,i]]
-[[f,j],[c,g],[a,e],[h,q],[d,i]]
-[[b,f],[g,p],[c,d],[i,j]]
-[[b,e],[h,p],[d,f],[g,i]]
-[[c,e],[h,j],[f,g]]
-[[d,e],[h,i]]
-
-sort 13 values
-sort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T, i::T, j::T, p::T, q::T, r::T) where T
-[[b,h],[j,q],[d,e],[f,i],[a,r],[c,g]]
-[[a,b],[c,d],[e,g],[i,q],[h,r],[f,j]]
-[[a,c],[d,h],[p,q],[b,e],[g,r]]
-[[h,i],[q,r],[e,j],[g,p]]
-[[d,e],[f,g],[i,j],[p,q],[b,h]]
-[[c,g],[j,q],[b,d],[e,h],[i,p],[a,f]]
-[[c,f],[g,i],[j,p]]
-[[b,c],[d,f],[h,i],[e,g]]
-[[c,d],[e,f],[g,h],[i,j]]
-[[d,e],[f,g]]
-
-sort 14 values
-sort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T, i::T, j::T, p::T, q::T, r::T, s::T) where T
-[[a,b],[c,d],[e,f],[g,h],[i,j],[p,q],[r,s]]
-[[a,c],[e,g],[i,p],[b,d],[f,h],[j,q]]
-[[a,e],[i,r],[b,f],[j,s],[c,g],[d,h]]
-[[a,i],[b,j],[c,p],[d,q],[e,r],[f,s]]
-[[f,p],[g,j],[d,r],[h,q],[b,c],[e,i]]
-[[b,e],[h,s],[c,i],[f,g],[j,p]]
-[[c,e],[q,s],[d,i],[h,r]]
-[[g,i],[p,r],[d,f],[h,j]]
-[[d,e],[f,g],[h,i],[j,p],[q,r]]
-[[g,h],[i,j]]
-
-sort 15 values
-sort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T, i::T, j::T, p::T, q::T, r::T, s::T, t::T) where T
-[[a,b],[c,d],[e,f],[g,h],[i,j],[p,q],[r,s]]
-[[a,c],[e,g],[i,p],[r,t],[b,d],[f,h],[j,q]]
-[[a,e],[i,r],[b,f],[j,s],[c,g],[p,t],[d,h]]
-[[a,i],[b,j],[c,p],[d,q],[e,r],[f,s],[g,t]]
-[[f,p],[g,j],[d,r],[s,t],[h,q],[b,c],[e,i]]
-[[b,e],[h,s],[c,i],[q,t],[f,g],[j,p]]
-[[c,e],[q,s],[d,i],[h,r]]
-[[g,i],[p,r],[d,f],[h,j]]
-[[d,e],[f,g],[h,i],[j,p],[q,r]]
-[[g,h],[i,j]]
-
-sort 16 values
-sort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T, i::T, j::T, p::T, q::T, r::T, s::T, t::T, u::T) where T
-[[a,b],[c,d],[e,f],[g,h],[i,j],[p,q],[r,s],[t,u]]
-[[a,c],[e,g],[i,p],[r,t],[b,d],[f,h],[j,q],[s,u]]
-[[a,e],[i,r],[b,f],[j,s],[c,g],[p,t],[d,h],[q,u]]
-[[a,i],[b,j],[c,p],[d,q],[e,r],[f,s],[g,t],[h,u]]
-[[f,p],[g,j],[d,r],[s,t],[h,q],[b,c],[e,i]]
-[[b,e],[h,s],[c,i],[q,t],[f,g],[j,p]]
-[[c,e],[q,s],[d,i],[h,r]]
-[[g,i],[p,r],[d,f],[h,j]]
-[[d,e],[f,g],[h,i],[j,p],[q,r]]
-[[g,h],[i,j]]
-
-=#
 
 #=
 sort 12 values
@@ -693,7 +389,75 @@ function sort(a::T,b::T,c::T,d::T,e::T,f::T,g::T,h::T,i::T,j::T) with T
     return a,b,c,d,e,f,g,h,i,j
 end
 
+#=
+sort 14 values
+=#
 
+function sort(a::T,b::T,c::T,d::T,e::T,f::T,g::T,h::T,i::T,j::T,k::T) with T
+
+    a, b = minmax(a, b)
+    c, d = minmax(c, d)
+    e, f = minmax(e, f)
+    g, h = minmax(g, h)
+    i, j = minmax(i, j)
+    k, l = minmax(k, l)
+    m, n = minmax(m, n)
+
+    a, c = minmax(a, c)
+    e, g = minmax(e, g)
+    i, k = minmax(i, k)
+    b, d = minmax(b, d)
+    f, h = minmax(f, h)
+    j, l = minmax(j, l)
+
+    a, e = minmax(a, e)
+    i, m = minmax(i, m)
+    b, f = minmax(b, f)
+    j, n = minmax(j, n)
+    c, g = minmax(c, g)
+    d, h = minmax(d, h)
+
+    a, i = minmax(a, i)
+    b, j = minmax(b, j)
+    c, k = minmax(c, k)
+    d, l = minmax(d, l)
+    e, m = minmax(e, m)
+    f, n = minmax(f, n)
+
+    f, k = minmax(f, k)
+    g, j = minmax(g, j)
+    d, m = minmax(d, m)
+    h, l = minmax(h, l)
+    b, c = minmax(b, c)
+    e, i = minmax(e, i)
+
+    b, e = minmax(b, e)
+    h, n = minmax(h, n)
+    c, i = minmax(c, i)
+    f, g = minmax(f, g)
+    j, k = minmax(j, k)
+
+    c, e = minmax(c, e)
+    l, n = minmax(l, n)
+    d, i = minmax(d, i)
+    h, m = minmax(h, m)
+
+    g, i = minmax(g, i)
+    k, m = minmax(k, m)
+    d, f = minmax(d, f)
+    h, j = minmax(h, j)
+
+    d, e = minmax(d, e)
+    f, g = minmax(f, g)
+    h, i = minmax(h, i)
+    j, k = minmax(j, k)
+    l, m = minmax(l, m)
+
+    g, h = minmax(g, h)
+    i, j = minmax(i, j)
+
+    return a,b,c,d,e,f,g,h,i,j,k
+end
 
 #=
 sort 16 values
@@ -774,6 +538,265 @@ function sort(a::T,b::T,c::T,d::T,e::T,f::T,g::T,h::T,i::T,j::T,k::T) with T
     return a,b,c,d,e,f,g,h,i,j,k
 end
 
+#=
+sort 18 values
+=#
+
+function sort(a::T,b::T,c::T,d::T,e::T,f::T,g::T,h::T,i::T,j::T,
+              k::T,l::T,m::T,n::T,o::T,p::T,q::T,r::T,s::T,t::T,
+              u::T) with T
+
+    a, b = minmax(a, b)
+    c, d = minmax(c, d)
+    e, f = minmax(e, f)
+    h, i = minmax(h, i)
+    j, k = minmax(j, k)
+    l, m = minmax(l, m)
+    n, o = minmax(n, o)
+    q, r = minmax(q, r)
+
+    a, c = minmax(a, c)
+    b, d = minmax(b, d)
+    g, i = minmax(g, i)
+    j, l = minmax(j, l)
+    k, m = minmax(k, m)
+    p, r = minmax(p, r)
+
+    b, c = minmax(b, c)
+    g, h = minmax(g, h)
+    f, i = minmax(f, i)
+    k, l = minmax(k, l)
+    p, q = minmax(p, q)
+    o, r = minmax(o, r)
+
+    e, h = minmax(e, h)
+    d, i = minmax(d, i)
+    n, q = minmax(n, q)
+    m, r = minmax(m, r)
+
+    e, g = minmax(e, g)
+    f, h = minmax(f, h)
+    n, p = minmax(n, p)
+    o, q = minmax(o, q)
+    i, r = minmax(i, r)
+
+    f, g = minmax(f, g)
+    c, h = minmax(c, h)
+    o, p = minmax(o, p)
+    l, q = minmax(l, q)
+
+    a, f = minmax(a, f)
+    b, g = minmax(b, g)
+    d, h = minmax(d, h)
+    j, o = minmax(j, o)
+    k, p = minmax(k, p)
+    m, q = minmax(m, q)
+
+    a, e = minmax(a, e)
+    b, f = minmax(b, f)
+    d, g = minmax(d, g)
+    j, n = minmax(j, n)
+    k, o = minmax(k, o)
+    m, p = minmax(m, p)
+    h, q = minmax(h, q)
+
+    b, e = minmax(b, e)
+    c, f = minmax(c, f)
+    k, n = minmax(k, n)
+    l, o = minmax(l, o)
+    a, j = minmax(a, j)
+    g, p = minmax(g, p)
+    i, q = minmax(i, q)
+
+    c, e = minmax(c, e)
+    d, f = minmax(d, f)
+    l, n = minmax(l, n)
+    m, o = minmax(m, o)
+    b, k = minmax(b, k)
+    h, p = minmax(h, p)
+
+    d, e = minmax(d, e)
+    m, n = minmax(m, n)
+    b, j = minmax(b, j)
+    c, l = minmax(c, l)
+    f, o = minmax(f, o)
+    i, p = minmax(i, p)
+
+    d, m = minmax(d, m)
+    c, j = minmax(c, j)
+    e, n = minmax(e, n)
+    h, o = minmax(h, o)
+
+    d, l = minmax(d, l)
+    f, n = minmax(f, n)
+    i, o = minmax(i, o)
+
+    d, k = minmax(d, k)
+    g, n = minmax(g, n)
+
+    d, j = minmax(d, j)
+    h, n = minmax(h, n)
+    f, k = minmax(f, k)
+    g, l = minmax(g, l)
+
+    i, n = minmax(i, n)
+    e, j = minmax(e, j)
+    h, m = minmax(h, m)
+
+    f, j = minmax(f, j)
+    i, m = minmax(i, m)
+    h, l = minmax(h, l)
+
+    i, l = minmax(i, l)
+    g, j = minmax(g, j)
+    h, k = minmax(h, k)
+
+    i, k = minmax(i, k)
+    h, j = minmax(h, j)
+
+    i, j = minmax(i, j)
+
+    return a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u
+end
+
+
+#=
+sort 20 values
+=#
+
+function sort(a::T,b::T,c::T,d::T,e::T,f::T,g::T,h::T,i::T,j::T,
+              k::T,l::T,m::T,n::T,o::T,p::T,q::T,r::T,s::T,t::T,
+              u::T,v::T) with T
+
+    a, b = minmax(a, b)
+    d, e = minmax(d, e)
+    f, g = minmax(f, g)
+    i, j = minmax(i, j)
+    k, l = minmax(k, l)
+    n, o = minmax(n, o)
+    p, q = minmax(p, q)
+    s, t = minmax(s, t)
+
+    c, e = minmax(c, e)
+    h, j = minmax(h, j)
+    m, o = minmax(m, o)
+    r, t = minmax(r, t)
+
+    c, d = minmax(c, d)
+    b, e = minmax(b, e)
+    h, i = minmax(h, i)
+    g, j = minmax(g, j)
+    m, n = minmax(m, n)
+    l, o = minmax(l, o)
+    r, s = minmax(r, s)
+    q, t = minmax(q, t)
+
+    a, d = minmax(a, d)
+    f, i = minmax(f, i)
+    e, j = minmax(e, j)
+    k, n = minmax(k, n)
+    p, s = minmax(p, s)
+    o, t = minmax(o, t)
+
+    a, c = minmax(a, c)
+    b, d = minmax(b, d)
+    f, h = minmax(f, h)
+    g, i = minmax(g, i)
+    k, m = minmax(k, m)
+    l, n = minmax(l, n)
+    p, r = minmax(p, r)
+    q, s = minmax(q, s)
+    j, t = minmax(j, t)
+
+    b, c = minmax(b, c)
+    g, h = minmax(g, h)
+    a, f = minmax(a, f)
+    d, i = minmax(d, i)
+    l, m = minmax(l, m)
+    q, r = minmax(q, r)
+    k, p = minmax(k, p)
+    n, s = minmax(n, s)
+
+    b, g = minmax(b, g)
+    c, h = minmax(c, h)
+    e, i = minmax(e, i)
+    l, q = minmax(l, q)
+    m, r = minmax(m, r)
+    o, s = minmax(o, s)
+    a, k = minmax(a, k)
+
+    b, f = minmax(b, f)
+    d, h = minmax(d, h)
+    l, p = minmax(l, p)
+    n, r = minmax(n, r)
+    i, s = minmax(i, s)
+
+    e, h = minmax(e, h)
+    c, f = minmax(c, f)
+    d, g = minmax(d, g)
+    o, r = minmax(o, r)
+    m, p = minmax(m, p)
+    n, q = minmax(n, q)
+    b, l = minmax(b, l)
+    j, s = minmax(j, s)
+
+    e, g = minmax(e, g)
+    d, f = minmax(d, f)
+    o, q = minmax(o, q)
+    n, p = minmax(n, p)
+    b, k = minmax(b, k)
+    c, m = minmax(c, m)
+    h, r = minmax(h, r)
+
+    e, f = minmax(e, f)
+    o, p = minmax(o, p)
+    d, n = minmax(d, n)
+    c, k = minmax(c, k)
+    g, q = minmax(g, q)
+    i, r = minmax(i, r)
+
+    e, o = minmax(e, o)
+    d, m = minmax(d, m)
+    f, p = minmax(f, p)
+    j, r = minmax(j, r)
+    i, q = minmax(i, q)
+
+    e, n = minmax(e, n)
+    d, l = minmax(d, l)
+    g, p = minmax(g, p)
+    j, q = minmax(j, q)
+
+    e, m = minmax(e, m)
+    d, k = minmax(d, k)
+    h, p = minmax(h, p)
+
+    e, l = minmax(e, l)
+    i, p = minmax(i, p)
+    h, m = minmax(h, m)
+
+    e, k = minmax(e, k)
+    j, p = minmax(j, p)
+    g, l = minmax(g, l)
+    i, n = minmax(i, n)
+
+    f, k = minmax(f, k)
+    j, o = minmax(j, o)
+    i, m = minmax(i, m)
+
+    g, k = minmax(g, k)
+    j, n = minmax(j, n)
+    i, l = minmax(i, l)
+
+    j, m = minmax(j, m)
+    h, k = minmax(h, k)
+
+    j, l = minmax(j, l)
+    i, k = minmax(i, k)
+
+    j, k = minmax(j, k)
+
+    return a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v
+end
 
 
 #=
@@ -926,6 +949,168 @@ function sort(a::T,b::T,c::T,d::T,e::T,f::T,g::T,h::T,i::T,j::T,k::T,l::T,m::T,n
     return a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u
 
 end
+
+#=
+sort 22 values
+=#
+
+function sort(a::T,b::T,c::T,d::T,e::T,f::T,g::T,h::T,i::T,j::T,
+              k::T,l::T,m::T,n::T,o::T,p::T,q::T,r::T,s::T,t::T,
+              u::T,v::T,w::T,x::T) with T
+
+    a, b = minmax(a, b)
+    d, e = minmax(d, e)
+    g, h = minmax(g, h)
+    j, k = minmax(j, k)
+    l, m = minmax(l, m)
+    o, p = minmax(o, p)
+    r, s = minmax(r, s)
+    u, v = minmax(u, v)
+
+    c, e = minmax(c, e)
+    f, h = minmax(f, h)
+    i, k = minmax(i, k)
+    n, p = minmax(n, p)
+    q, s = minmax(q, s)
+    t, v = minmax(t, v)
+
+    c, d = minmax(c, d)
+    b, e = minmax(b, e)
+    f, g = minmax(f, g)
+    i, j = minmax(i, j)
+    h, k = minmax(h, k)
+    n, o = minmax(n, o)
+    m, p = minmax(m, p)
+    q, r = minmax(q, r)
+    t, u = minmax(t, u)
+    s, v = minmax(s, v)
+
+    a, d = minmax(a, d)
+    f, i = minmax(f, i)
+    g, j = minmax(g, j)
+    e, k = minmax(e, k)
+    l, o = minmax(l, o)
+    q, t = minmax(q, t)
+    r, u = minmax(r, u)
+    p, v = minmax(p, v)
+
+    a, c = minmax(a, c)
+    b, d = minmax(b, d)
+    h, j = minmax(h, j)
+    g, i = minmax(g, i)
+    l, n = minmax(l, n)
+    m, o = minmax(m, o)
+    s, u = minmax(s, u)
+    r, t = minmax(r, t)
+    k, v = minmax(k, v)
+
+    b, c = minmax(b, c)
+    h, i = minmax(h, i)
+    a, g = minmax(a, g)
+    d, j = minmax(d, j)
+    m, n = minmax(m, n)
+    s, t = minmax(s, t)
+    l, r = minmax(l, r)
+    o, u = minmax(o, u)
+
+    a, f = minmax(a, f)
+    b, h = minmax(b, h)
+    c, i = minmax(c, i)
+    e, j = minmax(e, j)
+    l, q = minmax(l, q)
+    m, s = minmax(m, s)
+    n, t = minmax(n, t)
+    p, u = minmax(p, u)
+
+    b, g = minmax(b, g)
+    d, i = minmax(d, i)
+    m, r = minmax(m, r)
+    o, t = minmax(o, t)
+    a, l = minmax(a, l)
+    j, u = minmax(j, u)
+
+    b, f = minmax(b, f)
+    e, i = minmax(e, i)
+    d, g = minmax(d, g)
+    m, q = minmax(m, q)
+    p, t = minmax(p, t)
+    o, r = minmax(o, r)
+    k, u = minmax(k, u)
+
+    c, f = minmax(c, f)
+    e, h = minmax(e, h)
+    n, q = minmax(n, q)
+    p, s = minmax(p, s)
+    b, m = minmax(b, m)
+    i, t = minmax(i, t)
+
+    e, g = minmax(e, g)
+    d, f = minmax(d, f)
+    p, r = minmax(p, r)
+    o, q = minmax(o, q)
+    b, l = minmax(b, l)
+    c, n = minmax(c, n)
+    h, s = minmax(h, s)
+    j, t = minmax(j, t)
+
+    e, f = minmax(e, f)
+    p, q = minmax(p, q)
+    d, o = minmax(d, o)
+    c, l = minmax(c, l)
+    g, r = minmax(g, r)
+    k, t = minmax(k, t)
+
+    e, p = minmax(e, p)
+    d, n = minmax(d, n)
+    f, q = minmax(f, q)
+    h, r = minmax(h, r)
+    k, s = minmax(k, s)
+
+    e, o = minmax(e, o)
+    d, m = minmax(d, m)
+    g, q = minmax(g, q)
+    j, r = minmax(j, r)
+
+    e, n = minmax(e, n)
+    d, l = minmax(d, l)
+    h, q = minmax(h, q)
+    k, r = minmax(k, r)
+
+    e, m = minmax(e, m)
+    i, q = minmax(i, q)
+    h, n = minmax(h, n)
+
+    e, l = minmax(e, l)
+    j, q = minmax(j, q)
+    g, m = minmax(g, m)
+    i, o = minmax(i, o)
+
+    k, q = minmax(k, q)
+    f, l = minmax(f, l)
+    h, m = minmax(h, m)
+    j, p = minmax(j, p)
+
+    g, l = minmax(g, l)
+    k, p = minmax(k, p)
+    j, o = minmax(j, o)
+
+    h, l = minmax(h, l)
+    k, o = minmax(k, o)
+    j, m = minmax(j, m)
+
+    i, l = minmax(i, l)
+    k, n = minmax(k, n)
+
+    k, m = minmax(k, m)
+    j, l = minmax(j, l)
+
+    k, l = minmax(k, l)
+
+    return a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x
+end
+
+
+
 
 #=
 sort 24 values
@@ -1097,6 +1282,29 @@ function sort(a::T,b::T,c::T,d::T,e::T,f::T,g::T,h::T,i::T,j::T,k::T,l::T,m::T,n
     return a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y
 end
 
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
+for N in collect(MIN_ITEMS:MAX_ITEMS)
+   @eval sort(x::NTuple{$N, T}) where T = sort(x...)
+end   
+
+function sort(v::Vector{T}) where T
+   return if MIN_ITEMS <= length(v) <= MAX_ITEMS
+              [sort(v...)...]
+          else
+              sort(v, rev=false)
+          end
+end
+
+if isdefined(:StaticArrays)   
+  function sort(sv::SVector)
+     n = length(sv)
+     return if MIN_ITEMS <= n <= MAX_ITEMS
+                SVector{n}( sort(x.data)... )
+            else
+                sort(v, rev=false)
+            end
+  end
+end
 
 end # module TinySorts
