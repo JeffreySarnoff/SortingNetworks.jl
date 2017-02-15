@@ -44,8 +44,11 @@ There are 3 comparators in this network,
 
 function sort(a::T, b::T, c::T) where T
     b, c = minmax(b, c)
+    
     a, c = minmax(a, c)
+    
     a, b = minmax(a, b)
+    
     return a, b, c
 end
       
@@ -87,6 +90,7 @@ There are 9 comparators in this network,
 =#
 
 function sort(a::T, b::T, c::T, d::T, e::T) where T
+
     a, b = minmax(a, b)
     d, e = minmax(d, e)
 
@@ -105,6 +109,8 @@ function sort(a::T, b::T, c::T, d::T, e::T) where T
     return a, b, c, d, e
 end
 
+
+
 #=
 sort 6 values
 
@@ -119,7 +125,9 @@ There are 12 comparators in this network,
 [[3,4]]
 =#
 
-function sort(a::T, b::T, c::T, d::T, e::T, f::T) where T
+function sort(a::T, b::T, c::T, d::T, e::T,
+              f::T) where T
+
     b, c = minmax(b, c)
     e, f = minmax(e, f)
 
@@ -141,6 +149,7 @@ function sort(a::T, b::T, c::T, d::T, e::T, f::T) where T
     return a, b, c, d, e, f
 end
 
+
 #=
 sort 7 values
 re are 16 comparators in this network,
@@ -155,7 +164,9 @@ grouped into 7 parallel operations.
 [[3,4]]
 =#
 
-function sort(a::T, b::T, c::T, d::T, e::T, f::T, g::T) where T
+function sort(a::T, b::T, c::T, d::T, e::T,
+              f::T, g::T) where T
+
     b, c = minmax(b, c)
     d, e = minmax(d, e)
     f, g = minmax(f, g)
@@ -197,7 +208,9 @@ There are 19 comparators in this network,
 [[4,5]]
 =#
 
-function sort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T) where T
+function sort(a::T, b::T, c::T, d::T, e::T, 
+              f::T, g::T, h::T) where T
+
     a, b = minmax(a, b)
     c, d = minmax(c, d)
     e, f = minmax(e, f)
@@ -226,6 +239,9 @@ function sort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T) where T
 
     return a, b, c, d, e, f, g, h
 end
+
+
+
 
 #=
 sort 9 values
@@ -286,9 +302,13 @@ end
 
 #=
 sort 10 values
+
+There are 29 comparators in this network,
+  grouped into 9 parallel operations.
 =#
 
-function sort(a::T,b::T,c::T,d::T,e::T,f::T,g::T,h::T,i::T,j::T) where T
+function sort(a::T,b::T,c::T,d::T,e::T,
+              f::T,g::T,h::T,i::T,j::T) where T
 
     e, j = minmax(e, j)
     d, i = minmax(d, i)
@@ -331,6 +351,7 @@ function sort(a::T,b::T,c::T,d::T,e::T,f::T,g::T,h::T,i::T,j::T) where T
     return a,b,c,d,e,f,g,h,i,j
 end
 
+
 #=
 sort 11 values
 =#
@@ -339,8 +360,9 @@ sort 11 values
 #=
 sort 12 values
 =#
-
-function sort(a::T,b::T,c::T,d::T,e::T,f::T,g::T,h::T,i::T,j::T) where T
+function sort(a::T,b::T,c::T,d::T,e::T,
+              f::T,g::T,h::T,i::T,j::T,
+              k::T,l::T) where T
 
     a, b = minmax(a, b)
     c, d = minmax(c, d)
@@ -390,7 +412,7 @@ function sort(a::T,b::T,c::T,d::T,e::T,f::T,g::T,h::T,i::T,j::T) where T
     d, e = minmax(d, e)
     h, i = minmax(h, i)
 
-    return a,b,c,d,e,f,g,h,i,j
+    return a,b,c,d,e,f,g,h,i,j,k,l
 end
 
 #=
