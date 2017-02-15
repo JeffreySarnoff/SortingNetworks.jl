@@ -786,5 +786,176 @@ function sort(a::T,b::T,c::T,d::T,e::T,f::T,g::T,h::T,i::T,j::T,k::T,l::T,m::T,n
 
 end
 
+#=
+sort 24 values
+=#
+function sort(a::T,b::T,c::T,d::T,e::T,f::T,g::T,h::T,i::T,j::T,k::T,l::T,m::T,n::T,o::T,p::T,q::T,r::T,s::T,t::T,u::T,v::T,w::T,x::T,y::T) with T
+
+    b, c = minmax(b, c)
+    e, f = minmax(e, f)
+    h, i = minmax(h, i)
+    k, l = minmax(k, l)
+    n, o = minmax(n, o)
+    q, r = minmax(q, r)
+    t, u = minmax(t, u)
+    w, x = minmax(w, x)
+
+    a, c = minmax(a, c)
+    d, f = minmax(d, f)
+    g, i = minmax(g, i)
+    j, l = minmax(j, l)
+    m, o = minmax(m, o)
+    p, r = minmax(p, r)
+    s, u = minmax(s, u)
+    v, x = minmax(v, x)
+
+    a, b = minmax(a, b)
+    d, e = minmax(d, e)
+    c, f = minmax(c, f)
+    g, h = minmax(g, h)
+    j, k = minmax(j, k)
+    i, l = minmax(i, l)
+    m, n = minmax(m, n)
+    p, q = minmax(p, q)
+    o, r = minmax(o, r)
+    s, t = minmax(s, t)
+    v, w = minmax(v, w)
+    u, x = minmax(u, x)
+
+    a, d = minmax(a, d)
+    b, e = minmax(b, e)
+    g, j = minmax(g, j)
+    h, k = minmax(h, k)
+    f, l = minmax(f, l)
+    m, p = minmax(m, p)
+    n, q = minmax(n, q)
+    s, v = minmax(s, v)
+    t, w = minmax(t, w)
+    r, x = minmax(r, x)
+
+    c, e = minmax(c, e)
+    b, d = minmax(b, d)
+    i, k = minmax(i, k)
+    h, j = minmax(h, j)
+    a, g = minmax(a, g)
+    o, q = minmax(o, q)
+    n, p = minmax(n, p)
+    u, w = minmax(u, w)
+    t, v = minmax(t, v)
+    m, s = minmax(m, s)
+    l, x = minmax(l, x)
+
+    c, d = minmax(c, d)
+    i, j = minmax(i, j)
+    b, h = minmax(b, h)
+    e, k = minmax(e, k)
+    o, p = minmax(o, p)
+    u, v = minmax(u, v)
+    n, t = minmax(n, t)
+    q, w = minmax(q, w)
+    a, m = minmax(a, m)
+
+    c, i = minmax(c, i)
+    b, g = minmax(b, g)
+    d, j = minmax(d, j)
+    f, k = minmax(f, k)
+    o, u = minmax(o, u)
+    n, s = minmax(n, s)
+    p, v = minmax(p, v)
+    r, w = minmax(r, w)
+
+    c, h = minmax(c, h)
+    e, j = minmax(e, j)
+    o, t = minmax(o, t)
+    q, v = minmax(q, v)
+    b, n = minmax(b, n)
+    k, w = minmax(k, w)
+
+    c, g = minmax(c, g)
+    f, j = minmax(f, j)
+    e, h = minmax(e, h)
+    o, s = minmax(o, s)
+    r, v = minmax(r, v)
+    q, t = minmax(q, t)
+    b, m = minmax(b, m)
+    l, w = minmax(l, w)
+
+    d, g = minmax(d, g)
+    f, i = minmax(f, i)
+    p, s = minmax(p, s)
+    r, u = minmax(r, u)
+    c, o = minmax(c, o)
+    j, v = minmax(j, v)
+
+    f, h = minmax(f, h)
+    e, g = minmax(e, g)
+    r, t = minmax(r, t)
+    q, s = minmax(q, s)
+    c, n = minmax(c, n)
+    d, p = minmax(d, p)
+    i, u = minmax(i, u)
+    k, v = minmax(k, v)
+
+    f, g = minmax(f, g)
+    r, s = minmax(r, s)
+    c, m = minmax(c, m)
+    e, q = minmax(e, q)
+    h, t = minmax(h, t)
+    l, v = minmax(l, v)
+
+    f, r = minmax(f, r)
+    e, p = minmax(e, p)
+    d, m = minmax(d, m)
+    g, s = minmax(g, s)
+    i, t = minmax(i, t)
+    l, u = minmax(l, u)
+
+    f, q = minmax(f, q)
+    e, n = minmax(e, n)
+    h, s = minmax(h, s)
+    k, t = minmax(k, t)
+
+    f, p = minmax(f, p)
+    e, m = minmax(e, m)
+    i, s = minmax(i, s)
+    l, t = minmax(l, t)
+
+    f, o = minmax(f, o)
+    j, s = minmax(j, s)
+
+    f, n = minmax(f, n)
+    k, s = minmax(k, s)
+    i, o = minmax(i, o)
+    j, p = minmax(j, p)
+
+    f, m = minmax(f, m)
+    l, s = minmax(l, s)
+    h, n = minmax(h, n)
+    k, q = minmax(k, q)
+
+    g, m = minmax(g, m)
+    i, n = minmax(i, n)
+    l, r = minmax(l, r)
+    k, p = minmax(k, p)
+
+    h, m = minmax(h, m)
+    l, q = minmax(l, q)
+    k, n = minmax(k, n)
+
+    i, m = minmax(i, m)
+    l, p = minmax(l, p)
+
+    j, m = minmax(j, m)
+    l, o = minmax(l, o)
+
+    l, n = minmax(l, n)
+    k, m = minmax(k, m)
+
+    l, m = minmax(l, m)
+
+    return a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y
+end
+
+
 
 end # module TinySorts
