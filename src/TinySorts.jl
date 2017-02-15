@@ -635,6 +635,147 @@ sort(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T, i::T, j::T, p::T, q::T, r::
 [[g,h],[i,j]]
 
 =#
+
+#=
+sort 12 values
+=#
+
+function sort(a::T,b::T,c::T,d::T,e::T,f::T,g::T,h::T,i::T,j::T) with T
+
+    a, b = minmax(a, b)
+    c, d = minmax(c, d)
+    e, f = minmax(e, f)
+    g, h = minmax(g, h)
+    i, j = minmax(i, j)
+    k, l = minmax(k, l)
+
+    b, d = minmax(b, d)
+    f, h = minmax(f, h)
+    j, l = minmax(j, l)
+    a, c = minmax(a, c)
+    e, g = minmax(e, g)
+    i, k = minmax(i, k)
+
+    b, c = minmax(b, c)
+    f, g = minmax(f, g)
+    j, k = minmax(j, k)
+    a, e = minmax(a, e)
+    h, l = minmax(h, l)
+
+    b, f = minmax(b, f)
+    g, k = minmax(g, k)
+    d, h = minmax(d, h)
+    e, i = minmax(e, i)
+
+    f, j = minmax(f, j)
+    c, g = minmax(c, g)
+    a, e = minmax(a, e)
+    h, l = minmax(h, l)
+    d, i = minmax(d, i)
+
+    b, f = minmax(b, f)
+    g, k = minmax(g, k)
+    c, d = minmax(c, d)
+    i, j = minmax(i, j)
+
+    b, e = minmax(b, e)
+    h, k = minmax(h, k)
+    d, f = minmax(d, f)
+    g, i = minmax(g, i)
+
+    c, e = minmax(c, e)
+    h, j = minmax(h, j)
+    f, g = minmax(f, g)
+
+    d, e = minmax(d, e)
+    h, i = minmax(h, i)
+
+    return a,b,c,d,e,f,g,h,i,j
+end
+
+
+
+#=
+sort 16 values
+=#
+
+function sort(a::T,b::T,c::T,d::T,e::T,f::T,g::T,h::T,i::T,j::T,k::T) with T
+
+    a, b = minmax(a, b)
+    c, d = minmax(c, d)
+    e, f = minmax(e, f)
+    g, h = minmax(g, h)
+    i, j = minmax(i, j)
+    k, l = minmax(k, l)
+    m, n = minmax(m, n)
+    o, p = minmax(o, p)
+
+    a, c = minmax(a, c)
+    e, g = minmax(e, g)
+    i, k = minmax(i, k)
+    m, o = minmax(m, o)
+    b, d = minmax(b, d)
+    f, h = minmax(f, h)
+    j, l = minmax(j, l)
+    n, p = minmax(n, p)
+
+    a, e = minmax(a, e)
+    i, m = minmax(i, m)
+    b, f = minmax(b, f)
+    j, n = minmax(j, n)
+    c, g = minmax(c, g)
+    k, o = minmax(k, o)
+    d, h = minmax(d, h)
+    l, p = minmax(l, p)
+
+    a, i = minmax(a, i)
+    b, j = minmax(b, j)
+    c, k = minmax(c, k)
+    d, l = minmax(d, l)
+    e, m = minmax(e, m)
+    f, n = minmax(f, n)
+    g, o = minmax(g, o)
+    h, p = minmax(h, p)
+
+    f, k = minmax(f, k)
+    g, j = minmax(g, j)
+    d, m = minmax(d, m)
+    n, o = minmax(n, o)
+    h, l = minmax(h, l)
+    b, c = minmax(b, c)
+    e, i = minmax(e, i)
+
+    b, e = minmax(b, e)
+    h, n = minmax(h, n)
+    c, i = minmax(c, i)
+    l, o = minmax(l, o)
+    f, g = minmax(f, g)
+    j, k = minmax(j, k)
+
+    c, e = minmax(c, e)
+    l, n = minmax(l, n)
+    d, i = minmax(d, i)
+    h, m = minmax(h, m)
+
+    g, i = minmax(g, i)
+    k, m = minmax(k, m)
+    d, f = minmax(d, f)
+    h, j = minmax(h, j)
+
+    d, e = minmax(d, e)
+    f, g = minmax(f, g)
+    h, i = minmax(h, i)
+    j, k = minmax(j, k)
+    l, m = minmax(l, m)
+
+    g, h = minmax(g, h)
+    i, j = minmax(i, j)
+
+    return a,b,c,d,e,f,g,h,i,j,k
+end
+
+
+
 #=
 sort 21 values
 =#
