@@ -6,10 +6,10 @@ const MIN_ITEMS = 1
 const MAX_ITEMS = 9
 
 function minmax(a::T, b::T) where T<:Number
-    return (b < a) ? (b, a), (a, b)
+    return (b < a) ? (b, a) : (a, b)
 end
 function minmax(a::T, b::T) where T
-    return isless(b, a) ? (b, a), (a, b)
+    return isless(b, a) ? (b, a) : (a, b)
 end
 
 #=
@@ -299,15 +299,18 @@ end
 if isdefined(:StaticArrays)   
   function sort(sv::SVector)
      n = length(sv)
-     MIN_ITEMS <= length(v) <= MAX_ITEMS || throw(DomainError())
-     return SVector{n}( sort(x.data)... )
+     return if MIN_ITEMS <= n <= MAX_ITEMS
+                SVector{n}( sort(x.data)... )
+            else
+                sort(v, rev=false)
+            end
   end
 end
 
 
 #= 
    versions sorting from high values to low values
-=#
+
 function sort_reverse(a::T) where T
     return a
 end      
@@ -339,6 +342,7 @@ function sort_reverse(a::T, b::T, c::T, d::T, e::T, f::T, g::T, h::T) where T
     a, b, c, d, e, f, g, h = sort(a, b, c, d, e, f, g, h)
     return h, g, f, e, d, c, b, a
 end
+=#
 
 #=
 sort 3 values
