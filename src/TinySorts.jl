@@ -288,7 +288,7 @@ end
 sort 10 values
 =#
 
-function sort(a::T,b::T,c::T,d::T,e::T,f::T,g::T,h::T,i::T,j::T) with T
+function sort(a::T,b::T,c::T,d::T,e::T,f::T,g::T,h::T,i::T,j::T) where T
 
     e, j = minmax(e, j)
     d, i = minmax(d, i)
@@ -340,7 +340,7 @@ sort 11 values
 sort 12 values
 =#
 
-function sort(a::T,b::T,c::T,d::T,e::T,f::T,g::T,h::T,i::T,j::T) with T
+function sort(a::T,b::T,c::T,d::T,e::T,f::T,g::T,h::T,i::T,j::T) where T
 
     a, b = minmax(a, b)
     c, d = minmax(c, d)
@@ -402,7 +402,7 @@ sort 13 values
 sort 14 values
 =#
 
-function sort(a::T,b::T,c::T,d::T,e::T,f::T,g::T,h::T,i::T,j::T,k::T) with T
+function sort(a::T,b::T,c::T,d::T,e::T,f::T,g::T,h::T,i::T,j::T,k::T) where T
 
     a, b = minmax(a, b)
     c, d = minmax(c, d)
@@ -477,7 +477,7 @@ sort 15 values
 sort 16 values
 =#
 
-function sort(a::T,b::T,c::T,d::T,e::T,f::T,g::T,h::T,i::T,j::T,k::T) with T
+function sort(a::T,b::T,c::T,d::T,e::T,f::T,g::T,h::T,i::T,j::T,k::T) where T
 
     a, b = minmax(a, b)
     c, d = minmax(c, d)
@@ -562,7 +562,7 @@ sort 18 values
 
 function sort(a::T,b::T,c::T,d::T,e::T,f::T,g::T,h::T,i::T,j::T,
               k::T,l::T,m::T,n::T,o::T,p::T,q::T,r::T,s::T,t::T,
-              u::T) with T
+              u::T) where T
 
     a, b = minmax(a, b)
     c, d = minmax(c, d)
@@ -688,7 +688,7 @@ sort 20 values
 
 function sort(a::T,b::T,c::T,d::T,e::T,f::T,g::T,h::T,i::T,j::T,
               k::T,l::T,m::T,n::T,o::T,p::T,q::T,r::T,s::T,t::T,
-              u::T,v::T) with T
+              u::T,v::T) where T
 
     a, b = minmax(a, b)
     d, e = minmax(d, e)
@@ -825,7 +825,9 @@ end
 sort 21 values
 =#
 
-function sort(a::T,b::T,c::T,d::T,e::T,f::T,g::T,h::T,i::T,j::T,k::T,l::T,m::T,n::T,o::T,p::T,q::T,r::T,s::T,t::T,u::T) with T
+function sort(a::T,b::T,c::T,d::T,e::T,f::T,g::T,h::T,i::T,j::T,
+              k::T,l::T,m::T,n::T,o::T,p::T,q::T,r::T,s::T,t::T,
+              u::T) where T
 
     a, b = minmax(a, b)
     d, e = minmax(d, e)
@@ -978,7 +980,7 @@ sort 22 values
 
 function sort(a::T,b::T,c::T,d::T,e::T,f::T,g::T,h::T,i::T,j::T,
               k::T,l::T,m::T,n::T,o::T,p::T,q::T,r::T,s::T,t::T,
-              u::T,v::T,w::T,x::T) with T
+              u::T,v::T,w::T,x::T) where T
 
     a, b = minmax(a, b)
     d, e = minmax(d, e)
@@ -1140,7 +1142,9 @@ sort 23 values
 #=
 sort 24 values
 =#
-function sort(a::T,b::T,c::T,d::T,e::T,f::T,g::T,h::T,i::T,j::T,k::T,l::T,m::T,n::T,o::T,p::T,q::T,r::T,s::T,t::T,u::T,v::T,w::T,x::T,y::T) with T
+function sort(a::T,b::T,c::T,d::T,e::T,f::T,g::T,h::T,i::T,j::T,
+              k::T,l::T,m::T,n::T,o::T,p::T,q::T,r::T,s::T,t::T,
+              u::T,v::T,w::T,x::T,y::T) where T
 
     b, c = minmax(b, c)
     e, f = minmax(e, f)
