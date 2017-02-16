@@ -1,2 +1,2 @@
-# SmallSorts.jl
-Optimal comparison sorting of 2..12 values
+# SortingNetworks.jl
+Optimal comparison sorting of 1,2,..,16 values
