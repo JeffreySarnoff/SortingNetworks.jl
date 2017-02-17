@@ -1,2 +1,2 @@
 # SortingNetworks.jl
-Optimal comparison sorting of 1:16 values
+Sorting 2..24 values with conditional swaps
