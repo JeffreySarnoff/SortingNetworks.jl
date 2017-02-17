@@ -23,7 +23,7 @@ const NARGS_MAX = 25
 =#
 
 for N in collect(NARGS_MIN:NARGS_MAX)
-    @eval (sort(x::NTuple{$N, T})) = sort(x...)
+    @eval (sort{T}(x::NTuple{$N, T})) = sort(x...)
 end
 
 
