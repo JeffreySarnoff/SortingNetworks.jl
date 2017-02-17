@@ -5,8 +5,8 @@ __precompile__()
     These sorting networks should minimize conditional swaps.  
     The first sixteen are known to minimize conditional swaps.  
     
-    Functions are written with groups of internally parallelizable.    
-    statements given together and sequential steps are separated.  
+    Functions are a sequence of internally parallelizable blocks.
+    Functions are written using empty lines as block delmiters.
 
     `sort(x1::T, .., xn::T)::NTuple{n,T}`  
     `sort(tup::NTuple{n,T})::NTuple{n,T}`  
