@@ -1,6 +1,6 @@
 # SortingNetworks.jl
 
-##### Copyright ©2017 by Jeffrey Sarnoff.
+#### Copyright ©2017 by Jeffrey Sarnoff.
 
 Sort 1..25 values with conditional swaps.
 
