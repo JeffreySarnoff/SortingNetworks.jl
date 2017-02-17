@@ -23,20 +23,20 @@ const NARGS_MAX = 25
 =#
 
 for N in collect(NARGS_MIN:NARGS_MAX)
-    @eval (sort(x::NTuple{$N, T}) where T) = sort(x...)
+    @eval (sort(x::NTuple{$N, T})) = sort(x...)
 end
 
 
 #    sort 1 value with 0 minmaxs in 1 stage
 
-function sort(a::T) where T
+function sort{T}(a::T)
 
     return (a,)
 end
 
 #    sort 2 values with 1 minmaxs in 1 stage
 
-function sort(a::T, b::T) where T
+function sort{T}(a::T, b::T)
 
     a, b = minmax(a, b)
 
@@ -45,7 +45,7 @@ end
 
 #    sort 3 values with 3 minmaxs in 3 parallel stages
 
-function sort(a::T, b::T, c::T) where T
+function sort{T}(a::T, b::T, c::T)
 
     b, c = minmax(b, c)
 
@@ -58,7 +58,7 @@ end
 
 #    sort 4 values with 5 minmaxs in 3 parallel stages
 
-function sort(a::T, b::T, c::T, d::T) where T
+function sort{T}(a::T, b::T, c::T, d::T)
 
     a, b = minmax(a, b)
     c, d = minmax(c, d)
@@ -73,7 +73,7 @@ end
 
 #    sort 5 values with 9 minmaxs in 5 parallel stages
 
-  function sort(a::T, b::T, c::T, d::T, e::T) where T
+  function sort{T}(a::T, b::T, c::T, d::T, e::T)
 
     a, e = minmax(a, e)
     b, d = minmax(b, d)
@@ -91,8 +91,8 @@ end
 
 #    sort 6 values with 12 minmaxs in 6 parallel stages
 
-function sort(a::T, b::T, c::T, d::T, e::T,
-              f::T) where T
+function sort{T}(a::T, b::T, c::T, d::T, e::T,
+              f::T)
 
     b, c = minmax(b, c)
     e, f = minmax(e, f)
@@ -117,8 +117,8 @@ end
 
 #    sort 7 values with 16 minmaxs in 6 parallel stages
 
-function sort(a::T, b::T, c::T, d::T, e::T,
-              f::T, g::T) where T
+function sort{T}(a::T, b::T, c::T, d::T, e::T,
+              f::T, g::T)
 
     a, e = minmax(a, e)
     b, f = minmax(b, f)
@@ -147,8 +147,8 @@ end
 
 #    sort 8 values with 19 minmaxs in 7 parallel stages
 
-function sort(a::T, b::T, c::T, d::T, e::T,
-              f::T, g::T, h::T) where T
+function sort{T}(a::T, b::T, c::T, d::T, e::T,
+              f::T, g::T, h::T)
 
     a, b = minmax(a, b)
     c, d = minmax(c, d)
@@ -181,8 +181,8 @@ end
 
 #    sort 9 values with 25 minmaxs in 9 parallel stages
 
-function sort(a::T, b::T, c::T, d::T, e::T,
-              f::T, g::T, h::T, i::T) where T
+function sort{T}(a::T, b::T, c::T, d::T, e::T,
+              f::T, g::T, h::T, i::T)
 
     a, b = minmax(a, b)
     d, e = minmax(d, e)
@@ -223,8 +223,8 @@ end
 
 #    sort 10 values with 29 minmaxs in 9 parallel stages
 
-function sort(a::T,b::T,c::T,d::T,e::T,
-              f::T,g::T,h::T,i::T,j::T) where T
+function sort{T}(a::T,b::T,c::T,d::T,e::T,
+              f::T,g::T,h::T,i::T,j::T)
 
     e, j = minmax(e, j)
     d, i = minmax(d, i)
@@ -269,9 +269,9 @@ end
 
 #    sort 11 values with 35 minmaxs in 9 parallel stages
 
-function sort(a::T, b::T, c::T, d::T, e::T,
+function sort{T}(a::T, b::T, c::T, d::T, e::T,
               f::T, g::T, h::T, i::T, j::T,
-              k::T) where T
+              k::T)
 
     a, b = minmax(a, b)
     c, d = minmax(c, d)
@@ -322,9 +322,9 @@ end
 
 #    sort 12 values with 39 minmaxs in 9 parallel stages
 
-function sort(a::T,b::T,c::T,d::T,e::T,
+function sort{T}(a::T,b::T,c::T,d::T,e::T,
               f::T,g::T,h::T,i::T,j::T,
-              k::T,l::T) where T
+              k::T,l::T)
 
     a, b = minmax(a, b)
     c, d = minmax(c, d)
@@ -379,9 +379,9 @@ end
 
 #    sort 13 values with 45 minmaxs in 10 parallel stages
 
-function sort(a::T, b::T, c::T, d::T, e::T,
+function sort{T}(a::T, b::T, c::T, d::T, e::T,
               f::T, g::T, h::T, i::T, j::T,
-              k::T, l::T, m::T) where T
+              k::T, l::T, m::T)
 
     b, h = minmax(b, h)
     j, l = minmax(j, l)
@@ -443,9 +443,9 @@ end
 
 #    sort 14 values with 51 minmaxs in 10 parallel stages
 
-function sort(a::T, b::T, c::T, d::T, e::T,
+function sort{T}(a::T, b::T, c::T, d::T, e::T,
               f::T, g::T, h::T, i::T, j::T,
-              k::T, l::T, m::T, n::T) where T
+              k::T, l::T, m::T, n::T)
 
     a, b = minmax(a, b)
     c, d = minmax(c, d)
@@ -513,9 +513,9 @@ end
 
 #    sort 15 values with 56 minmaxs in 10 parallel stages
 
-function sort(a::T, b::T, c::T, d::T, e::T,
+function sort{T}(a::T, b::T, c::T, d::T, e::T,
               f::T, g::T, h::T, i::T, j::T,
-              k::T, l::T, m::T, n::T, o::T) where T
+              k::T, l::T, m::T, n::T, o::T)
 
     a, b = minmax(a, b)
     c, d = minmax(c, d)
@@ -588,10 +588,10 @@ end
 
 #    sort 16 values with 60 minmaxs in 10 parallel stages
 
-function sort(a::T, b::T, c::T, d::T, e::T,
+function sort{T}(a::T, b::T, c::T, d::T, e::T,
               f::T, g::T, h::T, i::T, j::T,
               k::T, l::T, m::T, n::T, o::T,
-              p::T) where T
+              p::T)
 
     a, b = minmax(a, b)
     c, d = minmax(c, d)
@@ -677,10 +677,10 @@ end
 
 #    sort 17 values with 74 minmaxs in 12 parallel stages
 
-function sort(a::T, b::T, c::T, d::T, e::T,
+function sort{T}(a::T, b::T, c::T, d::T, e::T,
                 f::T, g::T, h::T, i::T, j::T,
                 k::T, l::T, m::T, n::T, o::T,
-                p::T, q::T) where T
+                p::T, q::T)
 
     a, q = minmax(a, q)
     b, j = minmax(b, j)
@@ -773,10 +773,10 @@ end
 
 #    sort 18 values with 82 minmaxs in 13 parallel stages
 
-function sort(a::T, b::T, c::T, d::T, e::T,
+function sort{T}(a::T, b::T, c::T, d::T, e::T,
               f::T, g::T, h::T, i::T, j::T,
               k::T, l::T, m::T, n::T, o::T,
-              p::T, q::T, r::T) where T
+              p::T, q::T, r::T)
 
     a, q = minmax(a, q)
     b, r = minmax(b, r)
@@ -878,10 +878,10 @@ end
 
 #    sort 19 values with 91 minmaxs in 14 parallel stages
 
-function sort(a::T, b::T, c::T, d::T, e::T,
+function sort{T}(a::T, b::T, c::T, d::T, e::T,
               f::T, g::T, h::T, i::T, j::T,
               k::T, l::T, m::T, n::T, o::T,
-              p::T, q::T, r::T, s::T) where T
+              p::T, q::T, r::T, s::T)
 
     a, q = minmax(a, q)
     b, r = minmax(b, r)
@@ -993,10 +993,10 @@ end
 
 #    sort 20 values with 97 minmaxs in 14 parallel stages
 
-function sort(a::T, b::T, c::T, d::T, e::T,
+function sort{T}(a::T, b::T, c::T, d::T, e::T,
               f::T, g::T, h::T, i::T, j::T,
               k::T, l::T, m::T, n::T, o::T,
-              p::T, q::T, r::T, s::T, t::T) where T
+              p::T, q::T, r::T, s::T, t::T)
 
     a, q = minmax(a, q)
     b, r = minmax(b, r)
@@ -1114,11 +1114,11 @@ end
 
 #    sort 21 values with 107 minmaxs in 15 parallel stages
 
-function sort(a::T, b::T, c::T, d::T, e::T,
+function sort{T}(a::T, b::T, c::T, d::T, e::T,
               f::T, g::T, h::T, i::T, j::T,
               k::T, l::T, m::T, n::T, o::T,
               p::T, q::T, r::T, s::T, t::T,
-              u::T) where T
+              u::T)
 
     a, q = minmax(a, q)
     b, r = minmax(b, r)
@@ -1247,11 +1247,11 @@ end
 
 #    sort 22 values with 114 minmaxs in 15 parallel stages
 
-function sort(a::T, b::T, c::T, d::T, e::T,
+function sort{T}(a::T, b::T, c::T, d::T, e::T,
               f::T, g::T, h::T, i::T, j::T,
               k::T, l::T, m::T, n::T, o::T,
               p::T, q::T, r::T, s::T, t::T,
-              u::T, v::T) where T
+              u::T, v::T)
 
     a, q = minmax(a, q)
     b, r = minmax(b, r)
@@ -1387,11 +1387,11 @@ end
 
 #    sort 23 values with 122 minmaxs in 15 parallel stages
 
-function sort(a::T, b::T, c::T, d::T, e::T,
+function sort{T}(a::T, b::T, c::T, d::T, e::T,
               f::T, g::T, h::T, i::T, j::T,
               k::T, l::T, m::T, n::T, o::T,
               p::T, q::T, r::T, s::T, t::T,
-              u::T, v::T, w::T) where T
+              u::T, v::T, w::T)
 
     a, q = minmax(a, q)
     b, r = minmax(b, r)
@@ -1535,11 +1535,11 @@ end
 
 #    sort 24 values with 127 minmaxs in 15 parallel stages
 
-function sort(a::T, b::T, c::T, d::T, e::T,
+function sort{T}(a::T, b::T, c::T, d::T, e::T,
               f::T, g::T, h::T, i::T, j::T,
               k::T, l::T, m::T, n::T, o::T,
               p::T, q::T, r::T, s::T, t::T,
-              u::T, v::T, w::T, x::T) where T
+              u::T, v::T, w::T, x::T)
 
     a, q = minmax(a, q)
     b, r = minmax(b, r)
@@ -1688,11 +1688,11 @@ end
 
 #    sort 25 values with 138 minmaxs in 15 parallel stages
 
-function sort(a::T, b::T, c::T, d::T, e::T,
+function sort{T}(a::T, b::T, c::T, d::T, e::T,
               f::T, g::T, h::T, i::T, j::T,
               k::T, l::T, m::T, n::T, o::T,
               p::T, q::T, r::T, s::T, t::T,
-              u::T, v::T, w::T, x::T, y::T) where T
+              u::T, v::T, w::T, x::T, y::T)
 
     a, q = minmax(a, q)
     b, r = minmax(b, r)
