@@ -13,7 +13,11 @@ __precompile__()
 """
 module SortingNetworks
 
-export swapsort
+
+export swapsort, ExchangeSort
+
+immutable ExchangeSortAlg  <: Algorithm end
+const ExchangeSort  = ExchangeSortAlg()
 
 include("swapsort.jl")
 
