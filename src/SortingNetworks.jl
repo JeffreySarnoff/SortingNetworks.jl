@@ -1,3 +1,5 @@
+__precompile__()
+
 """
     Sorting networks that process 1,2,..25 values are given.  
     These sorting networks should minimize conditional swaps.  
@@ -13,6 +15,6 @@ module SortingNetworks
 
 import Base:sort
 
-include("functions.jl")
+include("sort.jl")
 
 end # module
