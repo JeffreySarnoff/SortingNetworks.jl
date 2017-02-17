@@ -7,8 +7,8 @@
     Functions are written with groups of internally parallelizable  
     statements given together and sequential steps are separated.  
 
-    `sort(x1::T, .., xn::T)::NTuple{n,T}`
-    `sort(tup::NTuple{n,T})::NTuple{n,T}`
+    `swapsort(x1::T, .., xn::T)::NTuple{n,T}`
+    `swapsort(tup::NTuple{n,T})::NTuple{n,T}`
     
     networks were selected using software by John Gamble
         http://pages.ripco.net/~jgamble/nw.html
@@ -23,20 +23,20 @@ const NARGS_MAX = 25
 =#
 
 for N in collect(NARGS_MIN:NARGS_MAX)
-    @eval (sort{T}(x::NTuple{$N, T})) = sort(x...)
+    @eval (swapsort{T}(x::NTuple{$N, T})) = swapsort(x...)
 end
 
 
 #    sort 1 value with 0 minmaxs in 1 stage
 
-function sort{T}(a::T)
+function swapsort{T}(a::T)
 
     return (a,)
 end
 
 #    sort 2 values with 1 minmaxs in 1 stage
 
-function sort{T}(a::T, b::T)
+function swapsort{T}(a::T, b::T)
 
     a, b = minmax(a, b)
 
@@ -45,7 +45,7 @@ end
 
 #    sort 3 values with 3 minmaxs in 3 parallel stages
 
-function sort{T}(a::T, b::T, c::T)
+function swapsort{T}(a::T, b::T, c::T)
 
     b, c = minmax(b, c)
 
@@ -58,7 +58,7 @@ end
 
 #    sort 4 values with 5 minmaxs in 3 parallel stages
 
-function sort{T}(a::T, b::T, c::T, d::T)
+function swapsort{T}(a::T, b::T, c::T, d::T)
 
     a, b = minmax(a, b)
     c, d = minmax(c, d)
@@ -73,7 +73,7 @@ end
 
 #    sort 5 values with 9 minmaxs in 5 parallel stages
 
-  function sort{T}(a::T, b::T, c::T, d::T, e::T)
+  function swapsort{T}(a::T, b::T, c::T, d::T, e::T)
 
     a, e = minmax(a, e)
     b, d = minmax(b, d)
@@ -91,7 +91,7 @@ end
 
 #    sort 6 values with 12 minmaxs in 6 parallel stages
 
-function sort{T}(a::T, b::T, c::T, d::T, e::T,
+function swapsort{T}(a::T, b::T, c::T, d::T, e::T,
               f::T)
 
     b, c = minmax(b, c)
@@ -117,7 +117,7 @@ end
 
 #    sort 7 values with 16 minmaxs in 6 parallel stages
 
-function sort{T}(a::T, b::T, c::T, d::T, e::T,
+function swapsort{T}(a::T, b::T, c::T, d::T, e::T,
               f::T, g::T)
 
     a, e = minmax(a, e)
@@ -147,7 +147,7 @@ end
 
 #    sort 8 values with 19 minmaxs in 7 parallel stages
 
-function sort{T}(a::T, b::T, c::T, d::T, e::T,
+function swapsort{T}(a::T, b::T, c::T, d::T, e::T,
               f::T, g::T, h::T)
 
     a, b = minmax(a, b)
@@ -181,7 +181,7 @@ end
 
 #    sort 9 values with 25 minmaxs in 9 parallel stages
 
-function sort{T}(a::T, b::T, c::T, d::T, e::T,
+function swapsort{T}(a::T, b::T, c::T, d::T, e::T,
               f::T, g::T, h::T, i::T)
 
     a, b = minmax(a, b)
@@ -223,7 +223,7 @@ end
 
 #    sort 10 values with 29 minmaxs in 9 parallel stages
 
-function sort{T}(a::T,b::T,c::T,d::T,e::T,
+function swapsort{T}(a::T,b::T,c::T,d::T,e::T,
               f::T,g::T,h::T,i::T,j::T)
 
     e, j = minmax(e, j)
@@ -269,7 +269,7 @@ end
 
 #    sort 11 values with 35 minmaxs in 9 parallel stages
 
-function sort{T}(a::T, b::T, c::T, d::T, e::T,
+function swapsort{T}(a::T, b::T, c::T, d::T, e::T,
               f::T, g::T, h::T, i::T, j::T,
               k::T)
 
@@ -322,7 +322,7 @@ end
 
 #    sort 12 values with 39 minmaxs in 9 parallel stages
 
-function sort{T}(a::T,b::T,c::T,d::T,e::T,
+function swapsort{T}(a::T,b::T,c::T,d::T,e::T,
               f::T,g::T,h::T,i::T,j::T,
               k::T,l::T)
 
@@ -379,7 +379,7 @@ end
 
 #    sort 13 values with 45 minmaxs in 10 parallel stages
 
-function sort{T}(a::T, b::T, c::T, d::T, e::T,
+function swapsort{T}(a::T, b::T, c::T, d::T, e::T,
               f::T, g::T, h::T, i::T, j::T,
               k::T, l::T, m::T)
 
@@ -443,7 +443,7 @@ end
 
 #    sort 14 values with 51 minmaxs in 10 parallel stages
 
-function sort{T}(a::T, b::T, c::T, d::T, e::T,
+function swapsort{T}(a::T, b::T, c::T, d::T, e::T,
               f::T, g::T, h::T, i::T, j::T,
               k::T, l::T, m::T, n::T)
 
@@ -513,7 +513,7 @@ end
 
 #    sort 15 values with 56 minmaxs in 10 parallel stages
 
-function sort{T}(a::T, b::T, c::T, d::T, e::T,
+function swapsort{T}(a::T, b::T, c::T, d::T, e::T,
               f::T, g::T, h::T, i::T, j::T,
               k::T, l::T, m::T, n::T, o::T)
 
@@ -588,7 +588,7 @@ end
 
 #    sort 16 values with 60 minmaxs in 10 parallel stages
 
-function sort{T}(a::T, b::T, c::T, d::T, e::T,
+function swapsort{T}(a::T, b::T, c::T, d::T, e::T,
               f::T, g::T, h::T, i::T, j::T,
               k::T, l::T, m::T, n::T, o::T,
               p::T)
@@ -677,7 +677,7 @@ end
 
 #    sort 17 values with 74 minmaxs in 12 parallel stages
 
-function sort{T}(a::T, b::T, c::T, d::T, e::T,
+function swapsort{T}(a::T, b::T, c::T, d::T, e::T,
                 f::T, g::T, h::T, i::T, j::T,
                 k::T, l::T, m::T, n::T, o::T,
                 p::T, q::T)
@@ -773,7 +773,7 @@ end
 
 #    sort 18 values with 82 minmaxs in 13 parallel stages
 
-function sort{T}(a::T, b::T, c::T, d::T, e::T,
+function swapsort{T}(a::T, b::T, c::T, d::T, e::T,
               f::T, g::T, h::T, i::T, j::T,
               k::T, l::T, m::T, n::T, o::T,
               p::T, q::T, r::T)
@@ -878,7 +878,7 @@ end
 
 #    sort 19 values with 91 minmaxs in 14 parallel stages
 
-function sort{T}(a::T, b::T, c::T, d::T, e::T,
+function swapsort{T}(a::T, b::T, c::T, d::T, e::T,
               f::T, g::T, h::T, i::T, j::T,
               k::T, l::T, m::T, n::T, o::T,
               p::T, q::T, r::T, s::T)
@@ -993,7 +993,7 @@ end
 
 #    sort 20 values with 97 minmaxs in 14 parallel stages
 
-function sort{T}(a::T, b::T, c::T, d::T, e::T,
+function swapsort{T}(a::T, b::T, c::T, d::T, e::T,
               f::T, g::T, h::T, i::T, j::T,
               k::T, l::T, m::T, n::T, o::T,
               p::T, q::T, r::T, s::T, t::T)
@@ -1114,7 +1114,7 @@ end
 
 #    sort 21 values with 107 minmaxs in 15 parallel stages
 
-function sort{T}(a::T, b::T, c::T, d::T, e::T,
+function swapsort{T}(a::T, b::T, c::T, d::T, e::T,
               f::T, g::T, h::T, i::T, j::T,
               k::T, l::T, m::T, n::T, o::T,
               p::T, q::T, r::T, s::T, t::T,
@@ -1247,7 +1247,7 @@ end
 
 #    sort 22 values with 114 minmaxs in 15 parallel stages
 
-function sort{T}(a::T, b::T, c::T, d::T, e::T,
+function swapsort{T}(a::T, b::T, c::T, d::T, e::T,
               f::T, g::T, h::T, i::T, j::T,
               k::T, l::T, m::T, n::T, o::T,
               p::T, q::T, r::T, s::T, t::T,
@@ -1387,7 +1387,7 @@ end
 
 #    sort 23 values with 122 minmaxs in 15 parallel stages
 
-function sort{T}(a::T, b::T, c::T, d::T, e::T,
+function swapsort{T}(a::T, b::T, c::T, d::T, e::T,
               f::T, g::T, h::T, i::T, j::T,
               k::T, l::T, m::T, n::T, o::T,
               p::T, q::T, r::T, s::T, t::T,
@@ -1535,7 +1535,7 @@ end
 
 #    sort 24 values with 127 minmaxs in 15 parallel stages
 
-function sort{T}(a::T, b::T, c::T, d::T, e::T,
+function swapsort{T}(a::T, b::T, c::T, d::T, e::T,
               f::T, g::T, h::T, i::T, j::T,
               k::T, l::T, m::T, n::T, o::T,
               p::T, q::T, r::T, s::T, t::T,
@@ -1688,7 +1688,7 @@ end
 
 #    sort 25 values with 138 minmaxs in 15 parallel stages
 
-function sort{T}(a::T, b::T, c::T, d::T, e::T,
+function swapsort{T}(a::T, b::T, c::T, d::T, e::T,
               f::T, g::T, h::T, i::T, j::T,
               k::T, l::T, m::T, n::T, o::T,
               p::T, q::T, r::T, s::T, t::T,
