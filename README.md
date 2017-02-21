@@ -31,5 +31,5 @@ ascending == swapsort(jumble)
 ascending == sorted
 ```
 
-With v0.6-dev, timing sort([a,b,..]) relative to swapsort(a,b,...),  
-I got 15x for 4 items, 11x for 8 items, 2x for 16 items
+With v0.6-dev, timing sort([a,b,..]) relative to swapsort(a,b,...),   
+I got 15x for 4 Ints, 11x for 8 Ints, 5.75x for 16 Ints
