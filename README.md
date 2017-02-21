@@ -22,7 +22,7 @@ These sorts return a tuple of values sorted in ascending order.
 using SortingNetworks
 
 jumble = (5,3,1,4,2)
-sorted = (1,2,3,4,5)7
+sorted = (1,2,3,4,5)
 
 ascending = swapsort(5,3,1,4,2)
 ascending == sorted
@@ -30,3 +30,6 @@ ascending == sorted
 ascending == swapsort(jumble)
 ascending == sorted
 ```
+
+With v0.6-dev, timing sort([a,b,..]) relative to swapsort(a,b,...),  
+I got 15x for 4 items, 11x for 8 items, 2x for 16 items
