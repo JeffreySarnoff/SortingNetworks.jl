@@ -14,10 +14,10 @@ Values may be given with the args  `swapsort(x1::T, .., xn::T)::NTuple{n,T}`
 Values may be given using a tuple  `swapsort(tup::NTuple{n,T})::NTuple{n,T}`  
 These sorts return a tuple of values sorted in ascending order.  
 
-####Install
+#### Install
 `Pkg.add("SortingNetworks")`
 
-####Use
+#### Use
 ```julia
 using SortingNetworks
 
