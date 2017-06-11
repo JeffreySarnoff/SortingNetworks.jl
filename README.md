@@ -1,10 +1,11 @@
 # SortingNetworks.jl
 
-##### Copyright ©2017 by Jeffrey Sarnoff.
-------
-
 Sort 1..25 values with conditional swaps.&nbsp;&nbsp; [![Build Status](https://travis-ci.org/JeffreySarnoff/SortingNetworks.jl.svg?branch=master)](https://travis-ci.org/JeffreySarnoff/SortingNetworks.jl)
 
+
+
+##### Copyright ©2017 by Jeffrey Sarnoff.
+------
 
 Sorting networks that process 1,2,..25 values are given.  
 These sorting networks should minimize conditional swaps.  
