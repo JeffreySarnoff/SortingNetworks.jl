@@ -16,7 +16,7 @@ module SortingNetworks
 
 export swapsort, ExchangeSort
 
-immutable ExchangeSortAlg  <: Base.Sort.Algorithm end
+struct ExchangeSortAlg  <: Base.Sort.Algorithm end
 const ExchangeSort  = ExchangeSortAlg()
 
 include("swapsort.jl")
