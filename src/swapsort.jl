@@ -1,5 +1,6 @@
 #=
     Sorting networks that process 1,2,..16 values are given.
+    Sorting networks that process 17..25 values are given in "swapsort_17to25.jl".
 
     These sorting networks should minimize conditional swaps.  
     The first sixteen are known to minimize conditional swaps.  
