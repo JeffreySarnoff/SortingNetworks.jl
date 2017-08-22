@@ -1,5 +1,5 @@
 #=
-    Sorting networks that process 1,2,..25 values are given.
+    Sorting networks that process 1,2,..16 values are given.
 
     These sorting networks should minimize conditional swaps.  
     The first sixteen are known to minimize conditional swaps.  
@@ -16,10 +16,10 @@
 =#
 
 const NARGS_MIN = 1
-const NARGS_MAX = 25
+const NARGS_MAX = 16
 
 #=
-   sort NTuples of 1..25 values
+   sort NTuples of 1..16 values
 =#
 
 for N in collect(NARGS_MIN:NARGS_MAX)
@@ -30,7 +30,6 @@ end
 #    sort 1 value with 0 minmaxs in 1 stage
 
 function swapsort(a::T) where {T}
-
     return (a,)
 end
 
