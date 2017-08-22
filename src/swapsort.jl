@@ -23,7 +23,7 @@ const NARGS_MAX = 25
 =#
 
 for N in collect(NARGS_MIN:NARGS_MAX)
-    @eval (swapsort{T}(x::NTuple{$N, T})) = swapsort(x...)
+    @eval swapsort(x::NTuple{$N, T}) where T = swapsort(x...)
 end
 
 
