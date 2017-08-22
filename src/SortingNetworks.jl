@@ -20,5 +20,6 @@ struct ExchangeSortAlg  <: Base.Sort.Algorithm end
 const ExchangeSort  = ExchangeSortAlg()
 
 include("swapsort.jl")
+include("swapsort_17to25.jl")
 
 end # module
