@@ -1,7 +1,7 @@
 __precompile__()
 
 """
-    Sorting networks that process 1,2,..25 values are given.  
+    Sorting networks for 1,2,..16 and 17,18..25 values are given.  
     These sorting networks should minimize conditional swaps.  
     The first sixteen are known to minimize conditional swaps.  
     
