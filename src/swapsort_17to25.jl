@@ -1,10 +1,11 @@
 #=
-    Sorting networks that process 1,2,..25 values are given.
+    Sorting networks that process 17,..25 values are given.
 
-    These sorting networks should minimize conditional swaps.  
-    The first sixteen are known to minimize conditional swaps.  
-    
-    Functions are written with groups of internally parallelizable  
+    These sorting networks should minimize conditional swaps.
+    There may exist one or more comparable alternative solutions;
+      those may perform marginally better for some kinds of hardware.
+          
+    Functions are written with groups of internally paralleli1zable  
     statements given together and sequential steps are separated.  
 
     `swapsort(x1::T, .., xn::T)::NTuple{n,T}`
