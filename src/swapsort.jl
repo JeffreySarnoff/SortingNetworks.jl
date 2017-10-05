@@ -86,6 +86,7 @@ function swapsort(a::T, b::T, c::T, d::T, e::T) where {T}
 
     a, b = minmax(a, b)
     c, d = minmax(c, d)
+
     b, c = minmax(b, c)
 
     return a, b, c, d, e
