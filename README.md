@@ -37,7 +37,7 @@ I got 15x for 4 Ints, 11x for 8 Ints, 5.75x for 16 Ints
 
 ##### acknowlegement
 
-Jan Weidner provided the *provably correct code* to test each implementation.
+Jan Weidner provided **provably correct** code to test each implementation.
 
 
 
