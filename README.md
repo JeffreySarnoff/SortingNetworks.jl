@@ -25,7 +25,7 @@ using SortingNetworks
 jumble = (5,3,1,4,2)
 sorted = (1,2,3,4,5)
 
-ascending = swapsort(5,3,1,4,2)
+ascending = swapsort(5,3,1,A4,2)
 ascending == sorted
 
 ascending == swapsort(jumble)
@@ -34,3 +34,10 @@ ascending == sorted
 
 With v0.6-dev, timing sort([a,b,..]) relative to swapsort(a,b,...),   
 I got 15x for 4 Ints, 11x for 8 Ints, 5.75x for 16 Ints
+
+##### acknowlegement
+
+Jan Weidner provided the *provably correct code* to test each implementation.
+
+
+
