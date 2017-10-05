@@ -73,18 +73,20 @@ end
 
 #    sort 5 values with 9 minmaxs in 5 parallel stages
 
-  function swapsort(a::T, b::T, c::T, d::T, e::T) where {T}
-
-    a, e = minmax(a, e)
-    b, d = minmax(b, d)
-
-    a, c = minmax(a, c)
-
-    c, e = minmax(c, e)
-    a, b = minmax(a, b)
+function swapsort(a::T, b::T, c::T, d::T, e::T) where {T}
 
     b, c = minmax(b, c)
     d, e = minmax(d, e)
+
+    b, d = minmax(b, d)
+    a, c = minmax(a, c)
+
+    c, e = minmax(c, e)
+    a, d = minmax(a, d)
+
+    a, b = minmax(a, b)
+    c, d = minmax(c, d)
+    b, c = minmax(b, c)
 
     return a, b, c, d, e
 end
