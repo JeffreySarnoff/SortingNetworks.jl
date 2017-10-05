@@ -1,25 +1,6 @@
 using SortingNetworks
 using Base.Test
 
-@testset "reverse" begin
-    for i in 1:25
-        tup = ( collect(1:i)... )
-        tst = reverse( tup )
-        @test swapsort(tst) == tup
-        @test swapsort(tst...) == tup
-    end
-end
-
-@testset "fuzztests" begin
-    for _ in 1:100
-        for i in 1:25
-            abc = randn(i)
-            result = swapsort(abc...)
-            @test issorted(result)
-        end
-    end
-end
-
 function bittuple_impl(::Val{N}) where {N}
     args = [:(ithbit(x, $i)) for i in 0:N-1]
    :(tuple($(args...)))
