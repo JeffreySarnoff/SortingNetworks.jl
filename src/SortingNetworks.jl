@@ -21,6 +21,5 @@ const ExchangeSort  = ExchangeSortAlg()
 
 include("swapsort.jl")
 include("swapsort_17to25.jl")
-include("swapsort_extras.jl")
 
 end # module
