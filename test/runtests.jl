@@ -1,5 +1,5 @@
 using SortingNetworks
-using Base.Test
+using Test
 
 function bittuple_impl(::Val{N}) where {N}
     args = [:(ithbit(x, $i)) for i in 0:N-1]
