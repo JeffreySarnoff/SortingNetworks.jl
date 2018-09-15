@@ -19,20 +19,13 @@
 const NARGS_MIN = 1
 const NARGS_MAX = 16
 
-#=
-   sort NTuples of 1..16 values
-=#
-
-for N in collect(NARGS_MIN:NARGS_MAX)
-    @eval swapsort(x::NTuple{$N, T}) where T = swapsort(x...)
-end
-
 
 #    sort 1 value with 0 minmaxs in 1 stage
 
 function swapsort(a::T) where {T}
     return (a,)
 end
+swapsort(x::NTuple{1,T}) where {T} = swapsort(x[1])
 
 #    sort 2 values with 1 minmaxs in 1 stage
 
@@ -42,6 +35,7 @@ function swapsort(a::T, b::T) where {T}
 
     return a,b
 end
+swapsort(x::NTuple{2T}) where {T} = swapsort(x[1], x[2])
 
 #    sort 3 values with 3 minmaxs in 3 parallel stages
 
@@ -55,6 +49,8 @@ function swapsort(a::T, b::T, c::T) where {T}
 
     return a, b, c
 end
+swapsort(x::NTuple{3,T}) where {T} = swapsort(x[1], x[2], x[3])
+    
 
 #    sort 4 values with 5 minmaxs in 3 parallel stages
 
@@ -70,6 +66,7 @@ function swapsort(a::T, b::T, c::T, d::T) where {T}
 
     return a, b, c, d
 end
+swapsort(x::NTuple{4,T}) where {T} = swapsort(x[1], x[2], x[3], x[4])
 
 #    sort 5 values with 9 minmaxs in 5 parallel stages
 
@@ -91,6 +88,7 @@ function swapsort(a::T, b::T, c::T, d::T, e::T) where {T}
 
     return a, b, c, d, e
 end
+swapsort(x::NTuple{5,T}) where {T} = swapsort(x[1], x[2], x[3], x[4], x[5])
 
 #    sort 6 values with 12 minmaxs in 6 parallel stages
 
@@ -117,6 +115,7 @@ function swapsort(a::T, b::T, c::T, d::T, e::T,
 
     return a, b, c, d, e, f
 end
+swapsort(x::NTuple{6,T}) where {T} = swapsort(x[1], x[2], x[3], x[4], x[5], x[6])
 
 #    sort 7 values with 16 minmaxs in 6 parallel stages
 
@@ -147,6 +146,7 @@ function swapsort(a::T, b::T, c::T, d::T, e::T,
 
     return a, b, c, d, e, f, g
 end
+swapsort(x::NTuple{7,T}) where {T} = swapsort(x[1], x[2], x[3], x[4], x[5], x[6], x[7])
 
 #    sort 8 values with 19 minmaxs in 7 parallel stages
 
@@ -181,6 +181,7 @@ function swapsort(a::T, b::T, c::T, d::T, e::T,
 
     return a, b, c, d, e, f, g, h
 end
+swapsort(x::NTuple{8,T}) where {T} = swapsort(x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8])
 
 #    sort 9 values with 25 minmaxs in 9 parallel stages
 
@@ -223,6 +224,7 @@ function swapsort(a::T, b::T, c::T, d::T, e::T,
 
     return a, b, c, d, e, f, g, h, i
 end
+swapsort(x::NTuple{9,T}) where {T} = swapsort(x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8], x[9])
 
 #    sort 10 values with 29 minmaxs in 9 parallel stages
 
@@ -269,6 +271,8 @@ function swapsort(a::T,b::T,c::T,d::T,e::T,
 
     return a,b,c,d,e,f,g,h,i,j
 end
+swapsort(x::NTuple{10,T}) where {T} =
+    swapsort(x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8], x[9], x[10])
 
 #    sort 11 values with 35 minmaxs in 9 parallel stages
 
@@ -322,6 +326,8 @@ function swapsort(a::T, b::T, c::T, d::T, e::T,
 
     return a,b,c,d,e,f,g,h,i,j,k
 end
+swapsort(x::NTuple{11,T}) where {T} =
+    swapsort(x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8], x[9], x[10], x[11])
 
 #    sort 12 values with 39 minmaxs in 9 parallel stages
 
@@ -379,6 +385,8 @@ function swapsort(a::T,b::T,c::T,d::T,e::T,
 
     return a,b,c,d,e,f,g,h,i,j,k,l
 end
+swapsort(x::NTuple{12,T}) where {T} =
+    swapsort(x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8], x[9], x[10], x[11], x[12])
 
 #    sort 13 values with 45 minmaxs in 10 parallel stages
 
@@ -443,6 +451,9 @@ function swapsort(a::T, b::T, c::T, d::T, e::T,
 
     return a,b,c,d,e,f,g,h,i,j,k,l,m
 end
+swapsort(x::NTuple{13,T}) where {T} =
+    swapsort(x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8], x[9], x[10],
+             x[11], x[12], x[13])
 
 #    sort 14 values with 51 minmaxs in 10 parallel stages
 
@@ -513,6 +524,9 @@ function swapsort(a::T, b::T, c::T, d::T, e::T,
 
     return a,b,c,d,e,f,g,h,i,j,k,l,m,n
 end
+swapsort(x::NTuple{14,T}) where {T} =
+    swapsort(x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8], x[9], x[10],
+             x[11], x[12], x[13], x[14])
 
 #    sort 15 values with 56 minmaxs in 10 parallel stages
 
@@ -588,6 +602,9 @@ function swapsort(a::T, b::T, c::T, d::T, e::T,
 
     return a,b,c,d,e,f,g,h,i,j,k,l,m,n,o
 end
+swapsort(x::NTuple{15,T}) where {T} =
+    swapsort(x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8], x[9], x[10],
+             x[11], x[12], x[13], x[14], x[15])
 
 #    sort 16 values with 60 minmaxs in 10 parallel stages
 
@@ -668,3 +685,6 @@ function swapsort(a::T, b::T, c::T, d::T, e::T,
 
     return a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p
 end
+swapsort(x::NTuple{16,T}) where {T} =
+    swapsort(x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8], x[9], x[10],
+             x[11], x[12], x[13], x[14], x[15], x[16])
