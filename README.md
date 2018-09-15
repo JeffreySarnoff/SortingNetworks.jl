@@ -25,7 +25,7 @@ using SortingNetworks
 jumble = (5,3,1,4,2)
 sorted = (1,2,3,4,5)
 
-ascending = swapsort(5,3,1,A4,2)
+ascending = swapsort(5,3,1,4,2)
 ascending == sorted
 
 ascending == swapsort(jumble)
