@@ -18,7 +18,8 @@
 =#
 
 const VALS = ([Val{i} for i=1:16]...,)
-@inline function swapsort(vec::Vector{T})
+
+@inline function swapsort(vec::Vector{T}) where {T}
     n = length(vec)
     n <= 16 && return swapsort(VALS[length(vec)], vec)
     throw(ErrorException("swapsort(vector) not defined where length(vector) > 16"))
@@ -61,7 +62,6 @@ end
 @inline swapsort(x::NTuple{3,T}) where {T} = swapsort(x[1], x[2], x[3])
 @inline swapsort(::Type{Val{3}}, x::Vector{T}) where {T} = swapsort(x[1], x[2], x[3])
     
-
 #    sort 4 values with 5 minmaxs in 3 parallel stages
 
 function swapsort(a::T, b::T, c::T, d::T) where {T}
