@@ -16,8 +16,6 @@
         http://search.cpan.org/dist/Algorithm-Networksort/
 =#
 
-const NARGS_MIN = 1
-const NARGS_MAX = 16
 
 
 #    sort 1 value with 0 minmaxs in 1 stage
@@ -37,7 +35,7 @@ function swapsort(a::T, b::T) where {T}
     return a,b
 end
 
-@inline swapsort(x::NTuple{2T}) where {T} = swapsort(x[1], x[2])
+@inline swapsort(x::NTuple{2,T}) where {T} = swapsort(x[1], x[2])
 
 #    sort 3 values with 3 minmaxs in 3 parallel stages
 
