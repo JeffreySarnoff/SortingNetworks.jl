@@ -44,6 +44,8 @@ end
     return ifelse(b < a, (a, b), (b, a))
 end
 
+const ITEMS_MAX = 25
+
 include("swapsort.jl")
 include("swapsort_17to25.jl")
 
