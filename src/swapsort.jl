@@ -17,12 +17,12 @@
         http://search.cpan.org/dist/Algorithm-Networksort/
 =#
 
-const VALS = ([Val{i} for i=1:16]...,)
+const VALS = ([Val{i} for i=1:ITEMS_MAX]...,)
 
 @inline function swapsort(vec::Vector{T}) where {T}
     n = length(vec)
-    n <= 16 && return swapsort(VALS[length(vec)], vec)
-    throw(ErrorException("swapsort(vector) not defined where length(vector) > 16"))
+    n > ITEMS_MAX && throw(ErrorException("swapsort(vector) not defined where length(vector) > $ITEMS_MAX"))
+    return swapsort(VALS[length(vec)], vec)
 end
 
 #    sort 1 value with 0 minmaxs in 1 stage
