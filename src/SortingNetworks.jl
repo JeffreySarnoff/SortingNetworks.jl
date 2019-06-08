@@ -34,14 +34,29 @@ Characteristics:
 struct ExchangeSortAlg  <: Base.Sort.Algorithm end
 const ExchangeSort  = ExchangeSortAlg()
 
-# these are more performant
+const MIN_MAX = :boolean # {:boolean, :ifelse, :minmax}
 
-@inline function min_max(a::T, b::T) where {T<:Real}
-    return ifelse(b < a, (a, b), (b, a))
-end
-
-@inline function max_min(a::T, b::T) where {T<:Real}
-    return ifelse(b < a, (a, b), (b, a))
+if MIN_MAX == :boolean
+    @inline function min_max(a::T, b::T) where {T<:Real}
+        return (b < a ? (b, a) : (a, b))
+    end
+    @inline function max_min(a::T, b::T) where {T<:Real}
+        return (b < a ? (a, b) : (b, a))
+    end
+elseif MIN_MAX == :ifelse
+    @inline function min_max(a::T, b::T) where {T<:Real}
+        return ifelse(b < a, (b, a), (a, b))
+    end
+    @inline function max_min(a::T, b::T) where {T<:Real}
+        return ifelse(b < a, (a, b), (b, a))
+    end
+elseif MIN_MAX == :minmax
+    @inline function min_max(a::T, b::T) where {T<:Real}
+        return min(a,b), max(a,b)
+    end
+    @inline function max_min(a::T, b::T) where {T<:Real}
+        return max(a,b), min(a,b)
+    end
 end
 
 const ITEMS_MAX = 25
