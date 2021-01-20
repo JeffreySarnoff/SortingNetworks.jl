@@ -37,24 +37,24 @@ const ExchangeSort  = ExchangeSortAlg()
 const MIN_MAX = :boolean # {:boolean, :ifelse, :minmax, :lessthan}
 
 if MIN_MAX == :boolean
-    @inline function min_max(a::T, b::T) where {T<:Real}
+    @inline function min_max(a::T, b::T) where {T}
         return (b < a ? (b, a) : (a, b))
     end
-    @inline function max_min(a::T, b::T) where {T<:Real}
+    @inline function max_min(a::T, b::T) where {T}
         return (b < a ? (a, b) : (b, a))
     end
 elseif MIN_MAX == :ifelse
-    @inline function min_max(a::T, b::T) where {T<:Real}
+    @inline function min_max(a::T, b::T) where {T}
         return ifelse(b < a, (b, a), (a, b))
     end
-    @inline function max_min(a::T, b::T) where {T<:Real}
+    @inline function max_min(a::T, b::T) where {T}
         return ifelse(b < a, (a, b), (b, a))
     end
 elseif MIN_MAX == :minmax
-    @inline function min_max(a::T, b::T) where {T<:Real}
+    @inline function min_max(a::T, b::T) where {T}
         return min(a,b), max(a,b)
     end
-    @inline function max_min(a::T, b::T) where {T<:Real}
+    @inline function max_min(a::T, b::T) where {T}
         return max(a,b), min(a,b)
     end
 elseif MIN_MAX == :lessthan
