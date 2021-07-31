@@ -10,7 +10,7 @@
 
     `swapsortr(x1::T, .., xn::T)::NTuple{n,T}`
     `swapsortr(tup::NTuple{n,T})::NTuple{n,T}`
-    `swapsortr(vec::Vector{T})::NTuple{N,T}`
+    `swapsortr(vec::AbstractVector{T})::NTuple{N,T}`
     
     networks were selected using software by John Gamble
         http://pages.ripco.net/~jgamble/nw.html
@@ -19,7 +19,7 @@
 
 const VALS = ([Val{i} for i=1:ITEMS_MAX]...,)
 
-@inline function swapsortr(vec::Vector{T}) where {T}
+@inline function swapsortr(vec::AbstractVector{T}) where {T}
     n = length(vec)
     n > ITEMS_MAX && throw(ErrorException("swapsortr(vector) not defined where length(vector) > $ITEMS_MAX"))
     return swapsortr(VALS[length(vec)], vec)
@@ -32,7 +32,7 @@ function swapsortr(a::T) where {T}
 end
 
 @inline swapsortr(x::NTuple{1,T}) where {T} = swapsortr(x[1])
-@inline swapsortr(::Type{Val{1}}, x::Vector{T}) where {T} = swapsortr(x[1])
+@inline swapsortr(::Type{Val{1}}, x::AbstractVector{T}) where {T} = swapsortr(x[1])
 
 #    sort 2 values with 1 minmaxs in 1 stage
 
@@ -44,7 +44,7 @@ function swapsortr(a::T, b::T) where {T}
 end
 
 @inline swapsortr(x::NTuple{2,T}) where {T} = swapsortr(x[1], x[2])
-@inline swapsortr(::Type{Val{2}}, x::Vector{T}) where {T} = swapsortr(x[1], x[2])
+@inline swapsortr(::Type{Val{2}}, x::AbstractVector{T}) where {T} = swapsortr(x[1], x[2])
 
 #    sort 3 values with 3 minmaxs in 3 parallel stages
 
@@ -60,7 +60,7 @@ function swapsortr(a::T, b::T, c::T) where {T}
 end
 
 @inline swapsortr(x::NTuple{3,T}) where {T} = swapsortr(x[1], x[2], x[3])
-@inline swapsortr(::Type{Val{3}}, x::Vector{T}) where {T} = swapsortr(x[1], x[2], x[3])
+@inline swapsortr(::Type{Val{3}}, x::AbstractVector{T}) where {T} = swapsortr(x[1], x[2], x[3])
     
 #    sort 4 values with 5 minmaxs in 3 parallel stages
 
@@ -78,7 +78,7 @@ function swapsortr(a::T, b::T, c::T, d::T) where {T}
 end
 
 @inline swapsortr(x::NTuple{4,T}) where {T} = swapsortr(x[1], x[2], x[3], x[4])
-@inline swapsortr(::Type{Val{4}}, x::Vector{T}) where {T} = swapsortr(x[1], x[2], x[3], x[4])
+@inline swapsortr(::Type{Val{4}}, x::AbstractVector{T}) where {T} = swapsortr(x[1], x[2], x[3], x[4])
 
 #    sort 5 values with 9 minmaxs in 5 parallel stages
 
@@ -102,7 +102,7 @@ function swapsortr(a::T, b::T, c::T, d::T, e::T) where {T}
 end
 
 @inline swapsortr(x::NTuple{5,T}) where {T} = swapsortr(x[1], x[2], x[3], x[4], x[5])
-@inline swapsortr(::Type{Val{5}}, x::Vector{T}) where {T} = swapsortr(x[1], x[2], x[3], x[4], x[5])
+@inline swapsortr(::Type{Val{5}}, x::AbstractVector{T}) where {T} = swapsortr(x[1], x[2], x[3], x[4], x[5])
 
 #    sort 6 values with 12 minmaxs in 6 parallel stages
 
@@ -131,7 +131,7 @@ function swapsortr(a::T, b::T, c::T, d::T, e::T,
 end
 
 @inline swapsortr(x::NTuple{6,T}) where {T} = swapsortr(x[1], x[2], x[3], x[4], x[5], x[6])
-@inline swapsortr(::Type{Val{6}}, x::Vector{T}) where {T} =
+@inline swapsortr(::Type{Val{6}}, x::AbstractVector{T}) where {T} =
     swapsortr(x[1], x[2], x[3], x[4], x[5], x[6])
 
 #    sort 7 values with 16 minmaxs in 6 parallel stages
@@ -165,7 +165,7 @@ function swapsortr(a::T, b::T, c::T, d::T, e::T,
 end
 
 @inline swapsortr(x::NTuple{7,T}) where {T} = swapsortr(x[1], x[2], x[3], x[4], x[5], x[6], x[7])
-@inline swapsortr(::Type{Val{7}}, x::Vector{T}) where {T} =
+@inline swapsortr(::Type{Val{7}}, x::AbstractVector{T}) where {T} =
     swapsortr(x[1], x[2], x[3], x[4], x[5], x[6], x[7])
 
 #    sort 8 values with 19 minmaxs in 7 parallel stages
@@ -203,7 +203,7 @@ function swapsortr(a::T, b::T, c::T, d::T, e::T,
 end
 
 @inline swapsortr(x::NTuple{8,T}) where {T} = swapsortr(x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8])
-@inline swapsortr(::Type{Val{8}}, x::Vector{T}) where {T} =
+@inline swapsortr(::Type{Val{8}}, x::AbstractVector{T}) where {T} =
     swapsortr(x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8])
 
 #    sort 9 values with 25 minmaxs in 9 parallel stages
@@ -249,7 +249,7 @@ function swapsortr(a::T, b::T, c::T, d::T, e::T,
 end
 
 @inline swapsortr(x::NTuple{9,T}) where {T} = swapsortr(x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8], x[9])
-@inline swapsortr(::Type{Val{9}}, x::Vector{T}) where {T} =
+@inline swapsortr(::Type{Val{9}}, x::AbstractVector{T}) where {T} =
     swapsortr(x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8], x[9])
 
 #    sort 10 values with 29 minmaxs in 9 parallel stages
@@ -300,7 +300,7 @@ end
 
 @inline swapsortr(x::NTuple{10,T}) where {T} =
     swapsortr(x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8], x[9], x[10])
-@inline swapsortr(::Type{Val{10}}, x::Vector{T}) where {T} =
+@inline swapsortr(::Type{Val{10}}, x::AbstractVector{T}) where {T} =
     swapsortr(x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8], x[9], x[10])
 
 #    sort 11 values with 35 minmaxs in 9 parallel stages
@@ -359,7 +359,7 @@ end
 @inline swapsortr(x::NTuple{11,T}) where {T} =
     swapsortr(x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8], x[9], x[10],
              x[11])
-@inline swapsortr(::Type{Val{11}}, x::Vector{T}) where {T} =
+@inline swapsortr(::Type{Val{11}}, x::AbstractVector{T}) where {T} =
     swapsortr(x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8], x[9], x[10],
              x[11])
 
@@ -423,7 +423,7 @@ end
 @inline swapsortr(x::NTuple{12,T}) where {T} =
     swapsortr(x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8], x[9], x[10],
              x[11], x[12])
-@inline swapsortr(::Type{Val{12}}, x::Vector{T}) where {T} =
+@inline swapsortr(::Type{Val{12}}, x::AbstractVector{T}) where {T} =
     swapsortr(x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8], x[9], x[10],
              x[11], x[12])
 
@@ -494,7 +494,7 @@ end
 @inline swapsortr(x::NTuple{13,T}) where {T} =
     swapsortr(x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8], x[9], x[10],
              x[11], x[12], x[13])
-@inline swapsortr(::Type{Val{13}}, x::Vector{T}) where {T} =
+@inline swapsortr(::Type{Val{13}}, x::AbstractVector{T}) where {T} =
     swapsortr(x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8], x[9], x[10],
              x[11], x[12], x[13])
 
@@ -571,7 +571,7 @@ end
 @inline swapsortr(x::NTuple{14,T}) where {T} =
     swapsortr(x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8], x[9], x[10],
              x[11], x[12], x[13], x[14])
-@inline swapsortr(::Type{Val{14}}, x::Vector{T}) where {T} =
+@inline swapsortr(::Type{Val{14}}, x::AbstractVector{T}) where {T} =
     swapsortr(x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8], x[9], x[10],
              x[11], x[12], x[13], x[14])
 
@@ -653,7 +653,7 @@ end
 @inline swapsortr(x::NTuple{15,T}) where {T} =
     swapsortr(x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8], x[9], x[10],
              x[11], x[12], x[13], x[14], x[15])
-@inline swapsortr(::Type{Val{15}}, x::Vector{T}) where {T} =
+@inline swapsortr(::Type{Val{15}}, x::AbstractVector{T}) where {T} =
     swapsortr(x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8], x[9], x[10],
              x[11], x[12], x[13], x[14], x[15])
 
@@ -740,6 +740,6 @@ end
 @inline swapsortr(x::NTuple{16,T}) where {T} =
     swapsortr(x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8], x[9], x[10],
              x[11], x[12], x[13], x[14], x[15], x[16])
-@inline swapsortr(::Type{Val{16}}, x::Vector{T}) where {T} =
+@inline swapsortr(::Type{Val{16}}, x::AbstractVector{T}) where {T} =
     swapsortr(x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8], x[9], x[10],
              x[11], x[12], x[13], x[14], x[15], x[16])
