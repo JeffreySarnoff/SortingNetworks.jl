@@ -34,7 +34,7 @@ Characteristics:
 struct ExchangeSortAlg  <: Base.Sort.Algorithm end
 const ExchangeSort  = ExchangeSortAlg()
 
-const MIN_MAX = :boolean # {:boolean, :ifelse, :minmax, :lessthan}
+const MIN_MAX = :ifelse # {:boolean, :ifelse, :minmax, :lessthan}
 
 if MIN_MAX == :boolean
     @inline function min_max(a::T, b::T) where {T<:Real}
