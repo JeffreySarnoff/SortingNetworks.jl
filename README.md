@@ -4,7 +4,7 @@ Sort 1..25 values with conditional swaps.&nbsp;&nbsp; [![Build Status](https://t
 
 
 
-##### Copyright ©2017-2020 by Jeffrey Sarnoff.
+##### Copyright ©2017-2022 by Jeffrey Sarnoff.
 ------
 
 Sorting networks that process 1,2,..25 values are given.  
