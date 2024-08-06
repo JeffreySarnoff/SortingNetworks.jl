@@ -16,12 +16,15 @@
         http://search.cpan.org/dist/Algorithm-Networksort/
 =#
 
-const MORE_ARGS_MIN = 17
+const MORE_ARGS_MIN = 18
 const MORE_ARGS_MAX = 25
 
 #=
    sort NTuples of 17..25 values
 =#
+
+@inline swapsort(x::NTuple{17,T}) where {T} = swapsort(x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8], x[9], x[10], x[11], x[12], x[13], x[14], x[15], x[16], x[17])
+@inline swapsort(::Type{Val{17}}, x::AbstractVector{T}) where {T} = swapsort(x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8], x[9], x[10], x[11], x[12], x[13], x[14], x[15], x[16], x[17])
 
 for N in collect(MORE_ARGS_MIN:MORE_ARGS_MAX)
     @eval swapsort(x::NTuple{$N, T}) where T = swapsort(x...)
